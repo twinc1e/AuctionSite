@@ -3,7 +3,7 @@
 	session_start();
 	if(empty($_SESSION["user_id"])){
 		header('Location: index.php');
-		exit();
+		exit();//hghgdhg
 	}
 	include 'function/db.php';
 	include 'function/validate.php';
@@ -61,6 +61,7 @@
 	<h1>Auction You Item</h1>
 	<form action="" class="form" method="post" enctype="multipart/form-data">
 		<p>
+            <input type="datetime-local">
 			<label for="name">Item name</label>
 			<input type="text" name="name" id="name"/>
 		</p>
