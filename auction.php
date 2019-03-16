@@ -9,7 +9,7 @@
 	include 'function/validate.php';
 	//May wrong below 1 line code
 	$_SESSION["notice"] = NULL;
-	
+
 	if(isset($_POST["submit"])){
 		$_SESSION["errorMsg"] = NULL;
 		$error = array();
@@ -25,17 +25,17 @@
 		$endminTmp = $_POST["endmin"];
 		$endtime = date("Y-m-d $endHourtemp:$endminTmp", strtotime("$endtimetemp days"));
 		/*End Date*/
-		
+
 		/* validate user input*/
 		validateTextBox($name, array(3,255), $error, "Item name" ,false);
 		validatePhoto($photo, $error, "Photo");
 		validateCurrency($price, $error, true, 0, 10000, "Price");
 		validateTextBox($description, array(25,1500), $error, "Item description" ,false);
 		/* end of validate */
-		
+
 		if(empty($error)){
 			move_uploaded_file($photo["tmp_name"], "asset/itemImg/" . $photo["name"]);
-			
+
 			$photoURL = "asset/itemImg/" . $photo["name"];
 			$query = "INSERT INTO item(itemname, photo, description, initialprice, endtime, category_id, status, user_id) values('$name', '$photoURL', '$description', '$price', '$endtime', '$category', 1, $user)";
 			$result = mysql_query($query) or die(mysql_error());
@@ -66,7 +66,7 @@
 		</p>
 		<p>
 			<label for="photo">Photo</label>
-			<input type="file" name="photo" id="photo" /> 
+			<input type="file" name="photo" id="photo" />
 		</p>
 		<p>
 			<label for="price">Price</label>
@@ -75,6 +75,7 @@
 		<p>
 			<label for="endtime">End after</label>
 			<select id="endtime" name="endtime">
+				<option value='0'>0 day</option>
 				<option value='1'>1 day</option>
 				<option value='2'>2 day</option>
 				<option value='3'>3 day</option>
@@ -106,7 +107,7 @@
 				<option value='29'>29 day</option>
 				<option value='30'>30 day</option>
 				<option value='31'>30 day</option>
-			</select>	
+			</select>
 			at
 			<select id="endhour" name="endhour">
 				<option value='00'>00 hours</option>
@@ -196,7 +197,7 @@
 				<option value='57'>57 minute</option>
 				<option value='58'>58 minute</option>
 				<option value='59'>59 minute</option>
-			</select>	
+			</select>
 		</p>
 		<p>
 			<label for="category">Category</label>
@@ -209,7 +210,7 @@
 						echo "<option value='" . $row['category_id'] . "'>" . $row['category_name'] . "</option>";
 					}
 				?>
-			</select>	
+			</select>
 		</p>
 		<p>
 			<label for="description">Description</label>
@@ -217,6 +218,6 @@
 		</p>
 		<p>
 			<input type="submit" id="submit" name="submit" value="submit">
-		</p>	
-	</form>	
+		</p>
+	</form>
 <?php include 'template/footer.php'; ?>
