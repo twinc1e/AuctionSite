@@ -61,7 +61,7 @@
 	<h1>Auction You Item</h1>
 	<form action="" class="form" method="post" enctype="multipart/form-data">
 		<p>
-            <input type="datetime-local">
+
 			<label for="name">Item name</label>
 			<input type="text" name="name" id="name"/>
 		</p>
@@ -74,7 +74,14 @@
 			<input type="text" name="price" id="price"/>
 		</p>
 		<p>
-			<label for="endtime">End after</label>
+			<label for="endtime">End time</label>
+            <?php
+            $format ="Y-m-d\TG:i";//2018-06-07T00:00
+            $now_datetime=date($format);
+            ?>
+            <input type="datetime-local" id="end_datetime"
+            min="<?php echo $now_datetime;?>">
+            <!--
 			<select id="endtime" name="endtime">
 				<option value='0'>0 day</option>
 				<option value='1'>1 day</option>
@@ -199,6 +206,7 @@
 				<option value='58'>58 minute</option>
 				<option value='59'>59 minute</option>
 			</select>
+			-->
 		</p>
 		<p>
 			<label for="category">Category</label>
