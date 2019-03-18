@@ -5,10 +5,10 @@
 <h1>Latest 10 Auction Item</h1>
 <?php
 	$query = "SELECT * FROM item, category WHERE item.category_id = category.category_id AND status=1 ORDER BY item_id DESC LIMIT 0,10";
-	$result = mysql_query($query) or die(mysql_error());
+	$result = $mysqli->query($query) or die(mysqli_error());
 	
-	if(mysql_num_rows($result) != 0){
-		while($row = mysql_fetch_array($result))
+	if(mysqli_num_rows($result) != 0){
+		while($row = mysqli_fetch_array($result))
 		{
 			echo "<div class='item'>";
 			echo "<div class='itemImage'><a href='item.php?itemid=" . $row['item_id'] . "'><img src='" . $row['photo'] . "' alt='" . $row['itemname'] . "'/></a></div>";

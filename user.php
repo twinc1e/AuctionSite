@@ -6,9 +6,9 @@
 	if(isset($_GET['view'])=='true' && !empty($_SESSION['user_id'])){
 		$user_id = $_SESSION['user_id'];
 		$queryView = "SELECT * FROM user WHERE user_id = $user_id";
-		$resultView = mysql_query($queryView) or die(mysql_error());
+		$resultView = $mysqli->query($queryView) or die(mysqli_error());
 		
-		$rowView = mysql_fetch_array($resultView);
+		$rowView = mysqli_fetch_array($resultView);
 	}
 	
 	if(isset($_GET['view'])=='true' && empty($_SESSION['user_id'])){
@@ -33,7 +33,7 @@
 
 			if(empty($error)){
 				$query = "INSERT INTO user(username, name, email, password) values('$username', '$name', '$email', '$password')";
-				$result = mysql_query($query) or die(mysql_error());
+				$result = $mysqli->query($query) or die(mysqli_error());
 
 				if($result){
 					$_SESSION["notice"] = "You have successfully register, you can login now";

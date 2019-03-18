@@ -11,13 +11,13 @@
 	
 	$itemId = $_GET['itemid'];
 	$query = "SELECT * FROM item,user,category WHERE item_id = $itemId AND item.user_id = user.user_id AND item.category_id = category.category_id";
-	$result = mysql_query($query) or die(mysql_error());
+	$result = $mysqli->query($query) or die(mysqli_error());
 	
-	if(mysql_num_rows($result) == 0){
+	if(mysqli_num_rows($result) == 0){
 		header('Location: index.php');
 		exit();
 	}else{
-		$row = mysql_fetch_array($result);
+		$row = mysqli_fetch_array($result);
 		$item_id = $row['item_id'];
 		$itemname = $row['itemname'];
 		$photo = $row['photo'];
@@ -36,8 +36,8 @@
 		
 		//Get the lastest bid
 		$queryHigherBid = "SELECT max(price) FROM bidHistory WHERE item_id = '$item_id' ORDER BY bidhistory_id DESC LIMIT 0, 1";
-		$resultHigherBid = mysql_query($queryHigherBid) or die(mysql_error());
-		$rowHigherBid = mysql_fetch_array($resultHigherBid);
+		$resultHigherBid = $mysqli->query($queryHigherBid) or die(mysqli_error());
+		$rowHigherBid = mysqli_fetch_array($resultHigherBid);
 		$priceHigherBid = $rowHigherBid['max(price)'];
 	}
 	
@@ -54,7 +54,7 @@
 		if(empty($error)){
 			$currentUser = $_SESSION['user_id'];
 			$queryBid = "INSERT INTO bidHistory(item_id, user_id, price) values('$item_id', '$currentUser', '$price')";
-			$resultBid = mysql_query($queryBid) or die(mysql_error());
+			$resultBid = $mysqli->query($queryBid) or die(mysqli_error());
 			if($resultBid){
 				$prev = $_SERVER['HTTP_REFERER'];
 				$_SESSION["notice"] = "You have successfully bid";
@@ -124,9 +124,9 @@
 			}
 		}else{
 			$queryWinner = "SELECT * FROM bidHistory, user WHERE bidHistory.item_id = $item_id AND bidHistory.user_id =user.user_id ORDER BY bidHistory.bidhistory_id DESC LIMIT 0,1";
-			$resultWinner = mysql_query($queryWinner) or die(mysql_error());
-			if(mysql_num_rows($resultWinner) != 0){
-				$rowWinner = mysql_fetch_array($resultWinner);
+			$resultWinner = $mysqli->query($queryWinner) or die(mysqli_error());
+			if(mysqli_num_rows($resultWinner) != 0){
+				$rowWinner = mysqli_fetch_array($resultWinner);
 				echo "<p><span>winner:</span> " . $rowWinner['username'] . "</p>";
 			}else{
 				echo "<p><span>winner:</span>N/A</p>";

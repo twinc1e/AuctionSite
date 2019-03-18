@@ -9,7 +9,7 @@
 		}else{
 			$query = "SELECT * FROM item, category WHERE category.category_id = '$category_id' AND item.category_id = '$category_id' AND status = 1 ORDER BY item.item_id DESC";
 		}
-		$result = mysql_query($query) or die(mysql_error());
+		$result = $mysqli->query($query) or die(mysqli_error());
 	}
 	
 	if(isset($_GET['archive'])){
@@ -19,7 +19,7 @@
 		}else{
 			$query = "SELECT * FROM item, category WHERE category.category_id = '$archive_id' AND item.category_id = '$archive_id' AND status = 0 ORDER BY item.item_id DESC";
 		}
-		$result = mysql_query($query) or die(mysql_error());
+		$result = $mysqli->query($query) or die(mysqli_error());
 	}
 	
 	if(!isset($_GET['archive']) && !isset($_GET['category'])){
@@ -32,9 +32,9 @@
 <?php
 	if(!empty($category_id)){
 		$queryCat = "SELECT * FROM category WHERE category_id = '$category_id' LIMIT 1";
-		$resultCat = mysql_query($queryCat) or die(mysql_error());
-		if(mysql_num_rows($resultCat)!=0){
-			$rowCat = mysql_fetch_array($resultCat);
+		$resultCat = $mysqli->query($queryCat) or die(mysqli_error());
+		if(mysqli_num_rows($resultCat)!=0){
+			$rowCat = mysqli_fetch_array($resultCat);
 			echo "Category: ".$rowCat['category_name'];
 		}else{
 			echo "Category: ALL";
@@ -42,9 +42,9 @@
 	}
 	if(!empty($archive_id)){
 		$queryCat = "SELECT * FROM category WHERE category_id = '$archive_id' LIMIT 1";
-		$resultCat = mysql_query($queryCat) or die(mysql_error());
-		if(mysql_num_rows($resultCat)!=0){
-			$rowCat = mysql_fetch_array($resultCat);
+		$resultCat = $mysqli->query($queryCat) or die(mysqli_error());
+		if(mysqli_num_rows($resultCat)!=0){
+			$rowCat = mysqli_fetch_array($resultCat);
 			echo "Archive: ".$rowCat['category_name'];
 		}else{
 			echo "Archive: ALL";
@@ -53,10 +53,10 @@
 ?>
 </h1>
 <?php
-	if(mysql_num_rows($result) == 0){
+	if(mysqli_num_rows($result) == 0){
 		echo "<p>No auction item available in this category</p>";
 	}else{
-		while($row = mysql_fetch_array($result))
+		while($row = mysqli_fetch_array($result))
 		{
 			echo "<div class='item'>";
 			echo "<div class='itemImage'><a href='item.php?itemid=" . $row['item_id'] . "'><img src='" . $row['photo'] . "' alt='" . $row['itemname'] . "'/></a></div>";

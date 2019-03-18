@@ -14,10 +14,10 @@
 		$_SESSION['errorMsg'] = NULL;
 		$_SESSION['notice'] = NULL;
 		$query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
-		$result = mysql_query($query) or die(mysql_error());
+		$result = $mysqli->query($query) or die(mysqli_error());
 		
-		if(mysql_num_rows($result)){
-			while($row = mysql_fetch_array($result))
+		if(mysqli_num_rows($result)){
+			while($row = mysqli_fetch_array($result))
 			{
 				$_SESSION['user_id'] = $row['user_id'];
 				$_SESSION['username'] = $row['username'];
