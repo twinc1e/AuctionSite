@@ -3,7 +3,7 @@
 	session_start();
 	if(empty($_SESSION["user_id"])){
 		header('Location: index.php');
-		exit();//hghgdhg
+		exit();
 	}
 	include 'function/db.php';
 	include 'function/validate.php';
@@ -20,10 +20,18 @@
 		$user = intval($_SESSION['user_id']);
 		$category = intval($_POST['category']);
 		/*Date*/
-		$endtimetemp = $_POST["endtime"];
-		$endHourtemp = $_POST["endhour"];
-		$endminTmp = $_POST["endmin"];
-		$endtime = date("Y-m-d $endHourtemp:$endminTmp", strtotime("$endtimetemp days"));
+		//echo  $_POST["end_datetime"];
+		//$endtime=date("Y-m-d H:i", $_POST["end_datetime"]);
+
+        //echo  $endtime;
+		$endtimetemp = $_POST["end_datetime"];
+		/*$endHourtemp = $_POST["endhour"];
+		$endMinTmp = $_POST["endmin"];
+		$endtime = date("Y-m-d $endHourtemp:$endMinTmp", strtotime("$endtimetemp days"));*/
+        /*$endtimetemp=DateTime::createFromFormat("Y-m-d\TG:i",$endtimetemp);
+        $endtime=$endtimetemp->getTimestamp();*/
+        $endtime=str_replace('T',' ',$endtimetemp);
+		//echo $endtime;
 		/*End Date*/
 
 		/* validate user input*/
@@ -41,7 +49,7 @@
 			$result = mysql_query($query) or die(mysql_error());
 
 			if($result){
-				//here didnt slove yet
+				//here didnt solve yet
 				$lastQueryId = mysql_insert_id();
 				$_SESSION["notice"] = "You have successfully post an auction.";
 				header("Location: item.php?itemid=$lastQueryId");
@@ -79,7 +87,7 @@
             $format ="Y-m-d\TG:i";//2018-06-07T00:00
             $now_datetime=date($format);
             ?>
-            <input type="datetime-local" id="end_datetime"
+            <input type="datetime-local" name="end_datetime" id="end_datetime"
             min="<?php echo $now_datetime;?>">
             <!--
 			<select id="endtime" name="endtime">
