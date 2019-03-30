@@ -9,7 +9,7 @@
 	include 'function/validate.php';
 	//May wrong below 1 line code
 	$_SESSION["notice"] = NULL;
-
+    $link=mysqli_connect("127.0.0.1","root","","auction");
 	if(isset($_POST["submit"])){
 		$_SESSION["errorMsg"] = NULL;
 		$error = array();
@@ -35,13 +35,13 @@
 			move_uploaded_file($photo["tmp_name"], "asset/itemImg/" . $photo["name"]);
 
 			$photoURL = "asset/itemImg/" . $photo["name"];
-			mysqli_connect("127.0.0.1",)
+
 			$query = "INSERT INTO item(itemname, photo, description, initialprice, endtime, category_id, status, user_id) values('$name', '$photoURL', '$description', '$price', '$endtime', '$category', 1, $user)";
-			$result = mysql_query($query) or die(mysql_error());
+			$result = mysqli_query($link,$query) or die(mysqli_error($link));
 
 			if($result){
 				//here didnt solve yet
-				$lastQueryId = mysql_insert_id();
+				$lastQueryId = mysqli_insert_id($link);
 				$_SESSION["notice"] = "You have successfully post an auction.";
 				header("Location: item.php?itemid=$lastQueryId");
 				exit();
@@ -87,8 +87,8 @@
 			<select name="category" id="category">
 				<?php
 					$query = "SELECT * FROM category";
-					$result = mysqli_query($query) or die(mysql_error());
-					while($row = mysql_fetch_array($result))
+					$result = mysqli_query($link,$query) or die(mysqli_error());
+					while($row = mysqli_fetch_array($result))
 					{
 						echo "<option value='" . $row['category_id'] . "'>" . $row['category_name'] . "</option>";
 					}
