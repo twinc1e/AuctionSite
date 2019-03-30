@@ -1,4 +1,5 @@
 <?php
+
 	function validateTextBox($text, $length, &$error, $attr, $empty=false){
 		if(is_string($text)){
 			if($empty == false){
@@ -63,10 +64,11 @@
 	
 	function validateUniqueUsername($username, &$error, $attr){
 		include 'db.php';
-		$query = "SELECT * FROM user WHERE username = '$username'";
-		$result = $mysqli->query($query) or die(mysqli_error());
 
-		if(mysqli_num_rows($result)){
+		$query = "SELECT * FROM user WHERE username = '$username'";
+		$result = $mysqli->query($query) or die($mysqli->error());
+
+		if($mysqli->num_rows($result)){
 			array_push($error, "$attr already exist, please choose other");
 		}
 	}
@@ -90,13 +92,13 @@
 	function validateBidPrice($pricebid, $initialprice, &$error, $itemid, $attr){
 		include "db.php";
 		$query = "SELECT max(price) FROM bidHistory WHERE item_id = '$itemid' ORDER BY bidhistory_id DESC LIMIT 0, 1";
-		$result = $mysqli->query($query) or die(mysqli_error());
-		$row = mysqli_fetch_array($result);
+		$result = $mysqli->query($query) or die($mysqli->error());
+		$row = $mysqli->fetch_array($result);
 		$pricebidhis = $row['max(price)'];
 		if($initialprice >= $pricebid){
-			array_push($error, "You biding value must be greater than intial price: $initialprice");
+			array_push($error, "Your biding value must be greater than intial price: $initialprice");
 		}elseif($pricebidhis >= $pricebid){
-			array_push($error, "You biding value must be greater than higher bid: $pricebidhis");
+			array_push($error, "Your biding value must be greater than higher bid: $pricebidhis");
 		}
 	}
 ?>

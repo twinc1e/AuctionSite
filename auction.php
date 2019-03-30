@@ -9,7 +9,7 @@
 	include 'function/validate.php';
 	//May wrong below 1 line code
 	$_SESSION["notice"] = NULL;
-    $link=mysqli_connect("127.0.0.1","root","","auction");
+    //$link=mysqli_connect("127.0.0.1","root","","auction");
 	if(isset($_POST["submit"])){
 		$_SESSION["errorMsg"] = NULL;
 		$error = array();
@@ -37,11 +37,11 @@
 			$photoURL = "asset/itemImg/" . $photo["name"];
 
 			$query = "INSERT INTO item(itemname, photo, description, initialprice, endtime, category_id, status, user_id) values('$name', '$photoURL', '$description', '$price', '$endtime', '$category', 1, $user)";
-			$result = mysqli_query($link,$query) or die(mysqli_error($link));
+			$result = $mysqli->query($query)or die($mysqli->error());
 
 			if($result){
 				//here didnt solve yet
-				$lastQueryId = mysqli_insert_id($link);
+				$lastQueryId = $mysqli->insert_id;
 				$_SESSION["notice"] = "You have successfully post an auction.";
 				header("Location: item.php?itemid=$lastQueryId");
 				exit();
@@ -50,7 +50,7 @@
 			for($i = 0; $i < count($error); $i++){
 				$_SESSION["errorMsg"] .= $error[$i]."<br/>";
 			}
-			$_SESSION["errorMsg"] .= "Please try to post ur auction item again.";
+			$_SESSION["errorMsg"] .= "Please try to post your auction item again.";
 			header('Location: auction.php');
 		}
 	}
@@ -87,8 +87,9 @@
 			<select name="category" id="category">
 				<?php
 					$query = "SELECT * FROM category";
-					$result = mysqli_query($link,$query) or die(mysqli_error());
-					while($row = mysqli_fetch_array($result))
+                    $result = $mysqli->query($query);
+
+					while($row = $result->fetch_array())
 					{
 						echo "<option value='" . $row['category_id'] . "'>" . $row['category_name'] . "</option>";
 					}
