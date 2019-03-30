@@ -3,24 +3,24 @@
 	include 'function/db.php';
 	
 	$queryExc = "SELECT * FROM item";
-	$resultExc = mysql_query($queryExc) or die(mysql_error());
+	$resultExc = $mysqli->query($queryExc) or die(mysqli_error());
 	
-	if(mysql_num_rows($resultExc) != 0){
-		while($rowExc = mysql_fetch_array($resultExc))
+	if(mysqli_num_rows($resultExc) != 0){
+		while($rowExc = mysqli_fetch_array($resultExc))
 		{
 			if(date("Y-m-d H:i") >date($rowExc['endtime'])){
 				$itemExc_id = $rowExc['item_id'];
 				$queryExcHB = "SELECT user_id FROM bidHistory WHERE item_id = $itemExc_id ORDER BY price DESC LIMIT 0, 1";
-				$resultExcHB = mysql_query($queryExcHB) or die(mysql_error());
+				$resultExcHB = $mysqli->query($queryExcHB) or die(mysqli_error());
 				
-				if(mysql_num_rows($resultExcHB) != 0){
-					$rowExcHB = mysql_fetch_array($resultExcHB);
+				if(mysqli_num_rows($resultExcHB) != 0){
+					$rowExcHB = mysqli_fetch_array($resultExcHB);
 					$priceExcHB = $rowExcHB['user_id'];
 				}else{
 					$priceExcHB = 0;
 				}
 				$queryUpExc = "UPDATE item SET status=0, winner='$priceExcHB' WHERE item_id=$itemExc_id";
-				$resultUpExc = mysql_query($queryUpExc) or die(mysql_error());
+				$resultUpExc = $mysqli->query($queryUpExc) or die(mysqli_error());
 			}
 		}
 	}
@@ -77,9 +77,9 @@
 								<?php
 								include 'function/db.php';
 								$query = "SELECT * FROM category";
-								$result = mysql_query($query) or die(mysql_error());
+								$result = $mysqli->query($query) or die(mysqli_error());
 								
-								while($row = mysql_fetch_array($result))
+								while($row = mysqli_fetch_array($result))
 								{
 									echo "<li><a href='category.php?category=".$row['category_id']."'>" . $row['category_name'] . "</a></li>";
 								}
@@ -92,9 +92,9 @@
 								<?php
 								include 'function/db.php';
 								$query = "SELECT * FROM category";
-								$result = mysql_query($query) or die(mysql_error());
+								$result = $mysqli->query($query) or die(mysqli_error());
 								
-								while($row = mysql_fetch_array($result))
+								while($row = mysqli_fetch_array($result))
 								{
 									echo "<li><a href='category.php?archive=".$row['category_id']."'>" . $row['category_name'] . "</a></li>";
 								}

@@ -4,8 +4,8 @@
 		$item_id = $_GET['item_id'];
 	
 		$queryBidHis = "SELECT * FROM bidHistory, user WHERE bidHistory.item_id = $item_id AND bidHistory.user_id =user.user_id ORDER BY bidHistory.bidhistory_id DESC";
-		$resultBidHis = mysql_query($queryBidHis) or die(mysql_error());
-		$emptyBidHis = (mysql_num_rows($resultBidHis) == 0? true:false);
+		$resultBidHis = $mysqli->query($queryBidHis) or die(mysqli_error());
+		$emptyBidHis = (mysqli_num_rows($resultBidHis) == 0? true:false);
 	}
 ?>
 
@@ -20,7 +20,7 @@
 			</tr>";
 		}else{
 			echo "<tr><th>User</th><th>Biding value</th></tr>";
-			while($rowBidHis = mysql_fetch_array($resultBidHis))
+			while($rowBidHis = mysqli_fetch_array($resultBidHis))
 			{
 				echo "<tr>
 					<td>" . $rowBidHis['username'] . "</td><td>" . $rowBidHis['price'] . "</td>

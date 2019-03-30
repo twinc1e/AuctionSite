@@ -64,9 +64,9 @@
 	function validateUniqueUsername($username, &$error, $attr){
 		include 'db.php';
 		$query = "SELECT * FROM user WHERE username = '$username'";
-		$result = mysql_query($query) or die(mysql_error());
+		$result = $mysqli->query($query) or die(mysqli_error());
 
-		if(mysql_num_rows($result)){
+		if(mysqli_num_rows($result)){
 			array_push($error, "$attr already exist, please choose other");
 		}
 	}
@@ -90,8 +90,8 @@
 	function validateBidPrice($pricebid, $initialprice, &$error, $itemid, $attr){
 		include "db.php";
 		$query = "SELECT max(price) FROM bidHistory WHERE item_id = '$itemid' ORDER BY bidhistory_id DESC LIMIT 0, 1";
-		$result = mysql_query($query) or die(mysql_error());
-		$row = mysql_fetch_array($result);
+		$result = $mysqli->query($query) or die(mysqli_error());
+		$row = mysqli_fetch_array($result);
 		$pricebidhis = $row['max(price)'];
 		if($initialprice >= $pricebid){
 			array_push($error, "You biding value must be greater than intial price: $initialprice");

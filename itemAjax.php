@@ -8,14 +8,14 @@
 		
 		if($user_id != 0){
 			$query = "UPDATE item SET status=0, winner=$user_id WHERE item_id=$item_id";
-			$result = mysql_query($query) or die(mysql_error());
+			$result = $mysqli->query($query) or die(mysqli_error());
 			
 			if($result){
 				$resultMsg = "winner";
 			}
 		}else{
 			$query = "UPDATE item SET status=0, winner=0 WHERE item_id=$item_id";
-			$result = mysql_query($query) or die(mysql_error());
+			$result = $mysqli->query($query) or die(mysqli_error());
 			
 			if($result){
 				$resultMsg =  "nowinner";
