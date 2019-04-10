@@ -103,12 +103,12 @@ p{
 	border-top:1px solid #000;
 	border-bottom:1px solid #000;
 	text-align:center;
-	padding:3px 0;
+	padding:5px 0;
 	font-size:14px;
 }
 .nav ul li{
 	display:inline-block;
-	padding: 3px 35px;
+	padding: 5px 35px;
 	position:relative;
 }
 .nav ul li .submenu{
