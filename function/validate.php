@@ -91,9 +91,10 @@
 	
 	function validateBidPrice($pricebid, $initialprice, &$error, $itemid, $attr){
 		include "db.php";
+		//echo $mysqli==null;
 		$query = "SELECT max(price) FROM bidHistory WHERE item_id = '$itemid' ORDER BY bidhistory_id DESC LIMIT 0, 1";
 		$result = $mysqli->query($query) or die($mysqli->error());
-		$row = $mysqli->fetch_array($result);
+		$row = $result->fetch_array();
 		$pricebidhis = $row['max(price)'];
 		if($initialprice >= $pricebid){
 			array_push($error, "Your biding value must be greater than intial price: $initialprice");
