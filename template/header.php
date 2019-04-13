@@ -1,10 +1,10 @@
 <?php
 	session_start();
 	include 'function/db.php';
-	
+
 	$queryExc = "SELECT * FROM item";
 	$resultExc = $mysqli->query($queryExc) or die(mysqli_error());
-	
+
 	if(mysqli_num_rows($resultExc) != 0){
 		while($rowExc = mysqli_fetch_array($resultExc))
 		{
@@ -12,7 +12,7 @@
 				$itemExc_id = $rowExc['item_id'];
 				$queryExcHB = "SELECT user_id FROM bidHistory WHERE item_id = $itemExc_id ORDER BY price DESC LIMIT 0, 1";
 				$resultExcHB = $mysqli->query($queryExcHB) or die(mysqli_error());
-				
+
 				if(mysqli_num_rows($resultExcHB) != 0){
 					$rowExcHB = mysqli_fetch_array($resultExcHB);
 					$priceExcHB = $rowExcHB['user_id'];
@@ -35,7 +35,7 @@
 		<link rel="stylesheet" type="text/css" href="./asset/font/mavenpro.css">
 		<link rel="stylesheet" type="text/css" href="./asset/style.css" />
 		<script src="./asset/jquery-1.6.3.min.js" type="text/javascript" charset="utf-8"></script>
-	</head>	
+	</head>
 	<body>
 		<div class="loginWrapper">
 			<div class="login">
@@ -49,22 +49,22 @@
 							<p>
 								<label for="username">Username</label>
 								<input type="text" name="username" id="username" />
-							</p>	
+							</p>
 							<p>
 								<label for="password">Password</label>
 								<input type="password" name="password" id="password">
 							</p>
-							<p>	
+							<p>
 								<input type="submit" id="submit">
-							</p>	
+							</p>
 						</form>
-						
+
 						<a href="user.php">Register as member</a>
 						<?php
 					}
 				?>
-			</div>	
-		</div>	
+			</div>
+		</div>
 		<div class="logoWrapper">
 			<div class="logo">
 				<h1><a href="index.php">AUCTION</a></h1>
@@ -78,22 +78,22 @@
 								include 'function/db.php';
 								$query = "SELECT * FROM category";
 								$result = $mysqli->query($query) or die(mysqli_error());
-								
+
 								while($row = mysqli_fetch_array($result))
 								{
 									echo "<li><a href='category.php?category=".$row['category_id']."'>" . $row['category_name'] . "</a></li>";
 								}
 								?>
-							</ul>	
+							</ul>
 						</li>
 						<li>
-							<a href="category.php?archive=all">Archive</a>
+							<a href="category.php?archive=all">Завершенные лоты</a>
 							<ul class="submenu">
 								<?php
 								include 'function/db.php';
 								$query = "SELECT * FROM category";
 								$result = $mysqli->query($query) or die(mysqli_error());
-								
+
 								while($row = mysqli_fetch_array($result))
 								{
 									echo "<li><a href='category.php?archive=".$row['category_id']."'>" . $row['category_name'] . "</a></li>";
@@ -103,14 +103,13 @@
 						</li>
 						<?php
 							if(isset($_SESSION["user_id"])){
-								echo "<li><a href='auction.php'>Auction Your Item</a></li>";
+								echo "<li><a href='auction.php'>Добавить товар</a></li>";
 							}
 						?>
-					</ul>	
+					</ul>
 				</div>
-			</div>		
-		</div>			
+			</div>
+		</div>
 		<div class="contentWrapper">
 			<div class="content">
 				<?php include "message.php"; ?>
-	

@@ -25,10 +25,10 @@
         $endtime=str_replace('T',' ',$endtimetemp);
 
 		/* validate user input*/
-		validateTextBox($name, array(3,255), $error, "Item name" ,false);
-		validatePhoto($photo, $error, "Photo");
-		validateCurrency($price, $error, true, 0, 10000, "Price");
-		validateTextBox($description, array(25,1500), $error, "Item description" ,false);
+		validateTextBox($name, array(3,255), $error, "Название товара" ,false);
+		validatePhoto($photo, $error, "Фото");
+		validateCurrency($price, $error, true, 0, 10000, "Цена");
+		validateTextBox($description, array(25,1500), $error, "Описание товара" ,false);
 		/* end of validate */
 
 		if(empty($error)){
@@ -42,7 +42,7 @@
 			if($result){
 				//here didnt solve yet
 				$lastQueryId = $mysqli->insert_id;
-				$_SESSION["notice"] = "You have successfully post an auction.";
+				$_SESSION["notice"] = "Лот успешно создан.";
 				header("Location: item.php?itemid=$lastQueryId");
 				exit();
 			}
