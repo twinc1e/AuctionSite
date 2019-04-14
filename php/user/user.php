@@ -1,20 +1,20 @@
 <?php
 	session_start();
-	include 'function/validate.php';
-	include 'function/db.php';
-	
+	require_once('../core/db.php');
+	require_once('../module/validate.php');
+
 	if(isset($_GET['view'])=='true' && !empty($_SESSION['user_id'])){
 		$user_id = $_SESSION['user_id'];
 		$queryView = "SELECT * FROM user WHERE user_id = $user_id";
 		$resultView = $mysqli->query($queryView) or die(mysqli_error());
-		
+
 		$rowView = mysqli_fetch_array($resultView);
 	}
-	
+
 	if(isset($_GET['view'])=='true' && empty($_SESSION['user_id'])){
-		header('Location: index.php');
+		header('Location: http://AuctionSite/index.php');
 	}
-	
+
 	if(isset($_POST["submit"])){
 		$_SESSION["errorMsg"] = NULL;
 		$error = array();
@@ -24,11 +24,11 @@
 		$password = $_POST['password'];
 
 		/* validate user input */
-		validateTextBox($username, array(3,20), $error, "Username" ,false);
-		validateUniqueUsername($username, $error, "Username");
-		validateTextBox($name, array(3,20), $error, "Name", false);
-		validateEmail($email, $error, "Email", false);
-		validateTextBox($password, array(3,20), $error, "Password", false);
+		validateTextBox($username, array(3,20), $error, "Пользователь" ,false);
+		validateUniqueUsername($username, $error, "Пользователь");
+		validateTextBox($name, array(3,20), $error, "Имя", false);
+		validateEmail($email, $error, "Эл.почта", false);
+		validateTextBox($password, array(3,20), $error, "Пароль", false);
 		/* end of validate */
 
 			if(empty($error)){
@@ -36,51 +36,51 @@
 				$result = $mysqli->query($query) or die(mysqli_error());
 
 				if($result){
-					$_SESSION["notice"] = "You have successfully register, you can login now";
-					header('Location: index.php');
+					$_SESSION["notice"] = "Вы успешно зарегистрировались, теперь можете войти";
+					header('Location: http://AuctionSite/index.php');
 				}
 			}else{
 				for($i = 0; $i < count($error); $i++){
 					$_SESSION["errorMsg"] .= $error[$i]."<br/>";
 				}
-				$_SESSION["errorMsg"].= "Please try to register again.";
+				$_SESSION["errorMsg"].= "Заново зарегистрируйтесь, пожалуйста";
 				header('Location: user.php');
 			}
 	}
 ?>
-<?php 
-	include 'template/header.php';
+<?php
+	require_once('../core/header.php');
 	if(isset($_GET['view'])=='true' && !empty($_SESSION['user_id'])){
-		echo "<h1>User info</h1>";
-		echo "<p>Username: " . $rowView['username'] . "</p>";
-		echo "<p>Name: " . $rowView['name'] . "</p>";
-		echo "<p>Email: " . $rowView['email'] . "</p>";
+		echo "<h1>Информация о пользователе</h1>";
+		echo "<p>Пользователь: " . $rowView['username'] . "</p>";
+		echo "<p>Имя: " . $rowView['name'] . "</p>";
+		echo "<p>Эл.почта: " . $rowView['email'] . "</p>";
 	}else{
 		?>
-		<h1>Register</h1>
+		<h1>Регистрация</h1>
 		<form action="" class="form" method="post">
 			<p>
-				<label for="username">Username</label>
+				<label for="username">Пользователь</label>
 				<input type="text" name="username" id="username" />
 			</p>
 			<p>
-				<label for="name">Name</label>
+				<label for="name">Имя</label>
 				<input type="text" name="name" id="name"/>
 			</p>
 			<p>
-				<label for="email">Email</label>
+				<label for="email">Эл.почта</label>
 				<input type="text" name="email" id="email"/>
 			</p>
 			<p>
-				<label for="password">Password</label>
+				<label for="password">Пароль</label>
 				<input type="password" name="password" id="password"/>
 			</p>
 			<p>
-				<input type="submit" id="submit" name="submit" value="submit">
-			</p>	
+				<input type="submit" id="submit" name="submit">
+			</p>
 		</form>
 		<?php
-	}	
+	}
 
-	include 'template/footer.php';
-?>	
+	require_once('../core/footer.php');
+?>

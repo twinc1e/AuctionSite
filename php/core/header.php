@@ -1,7 +1,5 @@
 <?php
 	session_start();
-	include 'function/db.php';
-
 	$queryExc = "SELECT * FROM item";
 	$resultExc = $mysqli->query($queryExc) or die(mysqli_error());
 
@@ -30,10 +28,9 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Auction by DEVLIM</title>
-		<link rel="stylesheet" type="text/css" href="./asset/font/bebasneue.css">
-		<link rel="stylesheet" type="text/css" href="./asset/font/mavenpro.css">
-		<link rel="stylesheet" type="text/css" href="./asset/style.css" />
+		<title>Аукцион "Torgi"</title>
+		<link rel="stylesheet" type="text/css" href="http://AuctionSite/asset/font/bebasneue.css">
+		<link rel="stylesheet" type="text/css" href="http://AuctionSite/asset/style.css" />
 		<script src="./asset/jquery-1.6.3.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
@@ -41,17 +38,17 @@
 			<div class="login">
 				<?php
 					if(isset($_SESSION["user_id"])){
-						echo "<p>Member: <a href='./user.php?view=true'>" . $_SESSION["username"] . "</a></p>";
+						echo "<p>Пользователь: <a href='../user/user.php?view=true'>" . $_SESSION["username"] . "</a></p>";
 						echo "<p><a href='logout.php'>logout</a><p>";
 					}else{
 						?>
-						<form action="./login.php" method="post">
+						<form action="http://AuctionSite/php/user/login.php" method="post">
 							<p>
-								<label for="username">Username</label>
+								<label for="username">Логин</label>
 								<input type="text" name="username" id="username" />
 							</p>
 							<p>
-								<label for="password">Password</label>
+								<label for="password">Пароль</label>
 								<input type="password" name="password" id="password">
 							</p>
 							<p>
@@ -59,7 +56,7 @@
 							</p>
 						</form>
 
-						<a href="user.php">Register as member</a>
+						<a href="../user/user.php">Регистрация</a>
 						<?php
 					}
 				?>
@@ -67,49 +64,45 @@
 		</div>
 		<div class="logoWrapper">
 			<div class="logo">
-				<h1><a href="index.php">AUCTION</a></h1>
+				<h1><a href="http://AuctionSite/index.php">Torgi</a></h1>
 				<div class="nav">
 					<ul>
-						<li><a href="index.php">Home</a></li>
+						<li><a href="http://AuctionSite/index.php">Главная</a></li>
 						<li>
-							<a href="category.php?category=all">Auction Item</a>
+							<a href="http://AuctionSite/php/item/category.php?category=all">Анонс</a>
 							<ul class="submenu">
 								<?php
-								include 'function/db.php';
+								// require_once('function/db.php');
 								$query = "SELECT * FROM category";
 								$result = $mysqli->query($query) or die(mysqli_error());
 
 								while($row = mysqli_fetch_array($result))
 								{
-									echo "<li><a href='category.php?category=".$row['category_id']."'>" . $row['category_name'] . "</a></li>";
+									echo "<li><a href='http://AuctionSite/php/item/category.php?category=".$row['category_id']."'>" . $row['category_name'] . "</a></li>";
 								}
 								?>
 							</ul>
-						</li>
-						<li>
-							<a href="category.php?archive=all">Завершенные лоты</a>
+				<?php if(isset($_SESSION["user_id"])){?>
+							<a href="http://AuctionSite/php/item/category.php?archive=all">История лотов</a>
 							<ul class="submenu">
 								<?php
-								include 'function/db.php';
+								// require_once('function/db.php');
 								$query = "SELECT * FROM category";
 								$result = $mysqli->query($query) or die(mysqli_error());
 
 								while($row = mysqli_fetch_array($result))
 								{
-									echo "<li><a href='category.php?archive=".$row['category_id']."'>" . $row['category_name'] . "</a></li>";
+									echo "<li><a href='../item/category.php?archive=".$row['category_id']."'>" . $row['category_name'] . "</a></li>";
 								}
 								?>
 							</ul>
+					<?}	?>
 						</li>
-						<?php
-							if(isset($_SESSION["user_id"])){
-								echo "<li><a href='auction.php'>Добавить товар</a></li>";
-							}
-						?>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="contentWrapper">
 			<div class="content">
-				<?php include "message.php"; ?>
+				<?php 	if ($link==null)	$link = '../module/message.php';
+				require_once ($link); ?>

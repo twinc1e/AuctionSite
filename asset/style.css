@@ -5,16 +5,17 @@ a{text-decoration:none; color:#000;}
 /*General*/
 h1{
 	font-family:"BebasNeueRegular";
-	margin-bottom:10px;
+	/* margin-bottom:10px; */
 }
 body{
 	min-height:800px;
 	font-family:"maven Pro";
-	font-size:14px;
+	/* font-size:14px; */
 }
 p{
-	line-height:21px;
-	margin-bottom:10px;
+	/* line-height:21px;
+	margin-bottom:10px; */
+	text-align: center;
 }
 /*Comman*/
 .logoWrapper, .loginWrapper, .contentWrapper, .footerWrapper{
@@ -25,7 +26,8 @@ p{
 	margin:0 auto;
 }
 .loginWrapper{
-	background:#000;	
+	/* background:#000; */
+  background-color: #1ea9ac;
 }
 
 /*Misc*/
@@ -59,22 +61,16 @@ p{
 
 /*Login*/
 .login{
-	height:30px;
-	line-height:30px;
-	background:#000;
+	display: inline-block;
+	/* height:30px;*/
+	/* line-height:30px; */
+	/* background:#000; */
 }
-.login a{
-	color:#fff;
-}
-.login p{
-	color:#fff;
-}
-.login form p, .login p{
+/*.login form p, */.login p, .login a{
 	float:left;
-	margin-right:25px;
-	line-height:30px;
-}
-.login form label{
+	/* margin-right:25px;
+	line-height:30px; */
+	margin: 0.5rem;
 	color:#fff;
 }
 .login form p input[type="submit"]{
@@ -84,14 +80,16 @@ p{
 }
 
 /*Logo*/
-.logo h1{
-	font-size:130px;
+.logo{
+	background-image: url('http://AuctionSite/asset/itemImg/header.jpg');
+	background-size: cover;
+	font-size:4em;
 	text-align:center;
 	margin-bottom:0;
 	margin:0 auto;
-	width:500px;
+	/* width:500px; */
 }
-.logo h1 a{color:#000;}
+.logo h1 a{    padding-right: 33%;}
 /*Nav*/
 .nav{
 	width:100%;
@@ -102,14 +100,20 @@ p{
 .nav ul{
 	border-top:1px solid #000;
 	border-bottom:1px solid #000;
-	text-align:center;
-	padding:5px 0;
-	font-size:14px;
+	/* text-align:center; */
+	/* padding:5px 0; */
+	/* padding-top: 0.2rem; */
+  /* padding-right: 33rem; */
+	font-size: 1rem;
+  font-weight: bold;
+	background-color: #1ea9ac;
 }
 .nav ul li{
 	display:inline-block;
-	padding: 5px 35px;
+	padding: 0.2rem 2rem;
 	position:relative;
+	border-right:1px solid #fff;
+	border-left:1px solid #fff;
 }
 .nav ul li .submenu{
 	min-width:300px;
@@ -198,7 +202,7 @@ p{
 	margin-top:80px;
 	background:#EEE;
 	padding:20px 0 30px 0;
-	
+
 }
 .bidhistory table{
 	width:90%;

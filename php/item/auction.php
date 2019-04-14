@@ -2,11 +2,11 @@
 
 	session_start();
 	if(empty($_SESSION["user_id"])){
-		header('Location: index.php');
+		header('Location: http://AuctionSite/index.php');
 		exit();
 	}
-	include 'function/db.php';
-	include 'function/validate.php';
+	require_once('php/core/db.php');
+	require_once('php/module/validate.php');
 	//May wrong below 1 line code
 	$_SESSION["notice"] = NULL;
     //$link=mysqli_connect("127.0.0.1","root","","auction");
@@ -24,7 +24,7 @@
 
         $endtime=str_replace('T',' ',$endtimetemp);
 
-		/* validate user input*/
+		/* validate user input. funct at /validate.php*/
 		validateTextBox($name, array(3,255), $error, "Название товара" ,false);
 		validatePhoto($photo, $error, "Фото");
 		validateCurrency($price, $error, true, 0, 10000, "Цена");
@@ -50,14 +50,14 @@
 			for($i = 0; $i < count($error); $i++){
 				$_SESSION["errorMsg"] .= $error[$i]."<br/>";
 			}
-			$_SESSION["errorMsg"] .= "Please try to post your auction item again.";
+			$_SESSION["errorMsg"] .= "Создайте лот заново, пожалуйста";
 			header('Location: auction.php');
 		}
 	}
 ?>
 
-<?php include 'template/header.php'; ?>
-	<h1>Auction You Item</h1>
+<?php require_once('php/core/header.php'); ?>
+	<h1>Добавить лот</h1>
 	<form action="" class="form" method="post" enctype="multipart/form-data">
 		<p>
 
@@ -104,4 +104,4 @@
 			<input type="submit" id="submit" name="submit" value="submit">
 		</p>
 	</form>
-<?php include 'template/footer.php'; ?>
+<?php require_once('php/core/footer.php'); ?>
