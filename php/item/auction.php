@@ -5,8 +5,8 @@
 		header('Location: http://AuctionSite/index.php');
 		exit();
 	}
-	require_once('php/core/db.php');
-	require_once('php/module/validate.php');
+	require_once('../core/db.php');
+	require_once('../module/validate.php');
 	//May wrong below 1 line code
 	$_SESSION["notice"] = NULL;
     //$link=mysqli_connect("127.0.0.1","root","","auction");
@@ -56,7 +56,7 @@
 	}
 ?>
 
-<?php require_once('php/core/header.php'); ?>
+<?php require_once('../core/header.php'); ?>
 	<h1>Добавить лот</h1>
 	<form action="" class="form" method="post" enctype="multipart/form-data">
 		<p>
@@ -104,4 +104,4 @@
 			<input type="submit" id="submit" name="submit" value="submit">
 		</p>
 	</form>
-<?php require_once('php/core/footer.php'); ?>
+<?php require_once('../core/footer.php'); ?>

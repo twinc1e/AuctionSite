@@ -38,8 +38,9 @@
 			<div class="login">
 				<?php
 					if(isset($_SESSION["user_id"])){
-						echo "<p>Пользователь: <a href='../user/user.php?view=true'>" . $_SESSION["username"] . "</a></p>";
-						echo "<p><a href='logout.php'>logout</a><p>";
+						if ($linku==null)	$linku = '../user/user.php?view=true';
+						echo "<a href=". $linku .">Личный кабинет ".$_SESSION["username"] . "</a><br>
+						<button class = 'btn'><span onclick='http://AuctionSite/php/user/logout.php'>logout</span></button>";
 					}else{
 						?>
 						<form action="http://AuctionSite/php/user/login.php" method="post">
@@ -82,7 +83,9 @@
 								}
 								?>
 							</ul>
-				<?php if(isset($_SESSION["user_id"])){?>
+						</li>
+						<?php if(isset($_SESSION["user_id"])){?>
+						<li>
 							<a href="http://AuctionSite/php/item/category.php?archive=all">История лотов</a>
 							<ul class="submenu">
 								<?php
@@ -96,7 +99,7 @@
 								}
 								?>
 							</ul>
-					<?}	?>
+						<?}	?>
 						</li>
 					</ul>
 				</div>

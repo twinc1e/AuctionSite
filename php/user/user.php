@@ -25,7 +25,7 @@
 
 		/* validate user input */
 		validateTextBox($username, array(3,20), $error, "Пользователь" ,false);
-		validateUniqueUsername($username, $error, "Пользователь");
+		validateUniqueUsername($username, $error, "ID");
 		validateTextBox($name, array(3,20), $error, "Имя", false);
 		validateEmail($email, $error, "Эл.почта", false);
 		validateTextBox($password, array(3,20), $error, "Пароль", false);

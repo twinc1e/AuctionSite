@@ -13,15 +13,15 @@ body{
 	/* font-size:14px; */
 }
 p{
-	/* line-height:21px;
-	margin-bottom:10px; */
-	text-align: center;
+	/* line-height:21px;*/
+	/* margin-bottom:10px; */
+	/* text-align: center; */
 }
 /*Comman*/
 .logoWrapper, .loginWrapper, .contentWrapper, .footerWrapper{
-	width:100%;
+	/* width:100%; */
 }
-.content, .login, .logo, .footer{
+.content, .login, .logo, .footer, .loginWrapper{
 	width:960px;
 	margin:0 auto;
 }
@@ -63,30 +63,49 @@ p{
 .login{
 	display: inline-block;
 	/* height:30px;*/
+	/* height: 2rem; */
 	/* line-height:30px; */
 	/* background:#000; */
+	/* display: inline-flex; */
 }
-/*.login form p, */.login p, .login a{
-	float:left;
+.login a, .login form/*.login form p, */{
+	/* float:left; */
 	/* margin-right:25px;
 	line-height:30px; */
-	margin: 0.5rem;
 	color:#fff;
+	padding: 0.5rem;
+	text-align: center;
+	display: inherit;/*if inherit so in center, if initial so in aleft and btn on the top/
 }
 .login form p input[type="submit"]{
-	line-height:30px;
-	margin-top:5px;
-	width:80px;
+	/* line-height:30px;*/
+	/*margin-top:5px;*/
+	/* width:80px; */
+	padding-right: 5px;
+	padding-left: 5px;
 }
-
+/*Content*/
+.content{
+	margin-top:30px;
+	min-height:500px;
+	overflow:auto;
+}
+.btn {
+	display: inline-block;
+	float:right;
+	padding-left: 8px;
+	padding-right: 8px;
+	margin-right: 1rem;
+	margin-top: -2rem;
+}
 /*Logo*/
 .logo{
 	background-image: url('http://AuctionSite/asset/itemImg/header.jpg');
 	background-size: cover;
 	font-size:4em;
 	text-align:center;
-	margin-bottom:0;
-	margin:0 auto;
+	/* margin-bottom:0; */
+	/* margin:0 auto; */
 	/* width:500px; */
 }
 .logo h1 a{    padding-right: 33%;}
@@ -132,15 +151,6 @@ p{
 .nav ul li .submenu:hover{
 	left:0;
 }
-/*Content*/
-.content{
-	margin-top:30px;
-	min-height:500px;
-}
-.content{
-	overflow:auto;
-}
-
 /*Footer*/
 .footerWrapper{
 	margin-top:50px;
@@ -253,7 +263,7 @@ p{
 .item .itemImage img{
 	width:100%;
 }
-.item p span{
+p span{
 	margin-right:15px;
 	display:inline-block;
 	width:65px;
