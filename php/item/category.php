@@ -9,7 +9,7 @@
 		}else{
 			$query = "SELECT * FROM item, category WHERE category.category_id = '$category_id' AND item.category_id = '$category_id' AND status = 1 ORDER BY item.item_id DESC";
 		}
-		$result = $mysqli->query($query) or die(mysqli_error());
+		$result = $mysqli->query($query) or die('Ошибка '.'Ошибка '.$mysqli->error);
 	}
 
 	if(isset($_GET['archive'])){
@@ -19,7 +19,7 @@
 		}else{
 			$query = "SELECT * FROM item, category WHERE category.category_id = '$archive_id' AND item.category_id = '$archive_id' AND status = 0 ORDER BY item.item_id DESC";
 		}
-		$result = $mysqli->query($query) or die(mysqli_error());
+		$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 	}
 
 	if(!isset($_GET['archive']) && !isset($_GET['category'])){
@@ -32,7 +32,7 @@
 <?php
 	if(!empty($category_id)){
 		$queryCat = "SELECT * FROM category WHERE category_id = '$category_id' LIMIT 1";
-		$resultCat = $mysqli->query($queryCat) or die(mysqli_error());
+		$resultCat = $mysqli->query($queryCat) or die('Ошибка '.$mysqli->error);
 		if(mysqli_num_rows($resultCat)!=0){
 			$rowCat = mysqli_fetch_array($resultCat);
 			echo "Категория: ".$rowCat['category_name'];
@@ -41,11 +41,11 @@
 		}
 	}
 	if(!empty($archive_id)){
-		$queryCat = "SELECT * FROM category WHERE category_id = '$archive_id' LIMIT 1";
-		$resultCat = $mysqli->query($queryCat) or die(mysqli_error());
-		if(mysqli_num_rows($resultCat)!=0){
-			$rowCat = mysqli_fetch_array($resultCat);
-			echo "История: ".$rowCat['category_name'];
+		$queryArch = "SELECT * FROM category WHERE category_id = '$archive_id' LIMIT 1";
+		$resultArch = $mysqli->query($queryArch) or die('Ошибка '.$mysqli->error);
+		if(mysqli_num_rows($resultArch)!=0){
+			$rowArch = mysqli_fetch_array($resultArch);
+			echo "История: ".$rowArch['category_name'];
 		}else{
 			echo "История лотов: ВСЕ";
 		}
@@ -60,7 +60,7 @@
 		{
 			echo "<div class='item'>";
 			echo "<div class='itemImage'>
-										<a href='item.php?№ " . $row['item_id'] . "'><img src='" . $row['photo'] . "' alt='" . $row['itemname'] . "'/></a></div>";
+										<a href='item.php?ID=" . $row['item_id'] . "'><img src='" . $row['photo'] . "' alt='" . $row['itemname'] . "'/></a></div>";
 			echo "<p><span class='itemname'>Название:</span><a href='item.php?itemid=" . $row['item_id'] . "'>" . $row['itemname'] . "</a></p>";
 			echo "<p><span>Конец времени:</span> " . $row['endtime'] . "</p>";
 			if(!empty($category_id)){
@@ -73,5 +73,5 @@
 		}
 	}
 ?>
-<script type="text/javascript" src="asset/equalHeightCol.js"></script>
+<script type="text/javascript" src="../../asset/js/equalHeightCol.js"></script>
 <?php require_once('../core/footer.php'); ?>

@@ -4,12 +4,12 @@ a{text-decoration:none; color:#000;}
 
 /*General*/
 h1{
-	font-family:"BebasNeueRegular";
+	font-family:"font/BebasNeueRegular";
 	/* margin-bottom:10px; */
 }
 body{
 	min-height:800px;
-	font-family:"maven Pro";
+	/* font-family:"font/maven Pro"; */
 	/* font-size:14px; */
 }
 p{
@@ -202,7 +202,7 @@ p{
 }
 .itemdesc p span{
 	color:#0050B8;
-	display:block;
+	display:initial;
 }
 .itemdesc .warning{
 	background:#FF8585;

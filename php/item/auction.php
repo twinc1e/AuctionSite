@@ -1,5 +1,4 @@
 <?php
-
 	session_start();
 	if(empty($_SESSION["user_id"])){
 		header('Location: http://AuctionSite/index.php');
@@ -32,12 +31,12 @@
 		/* end of validate */
 
 		if(empty($error)){
-			move_uploaded_file($photo["tmp_name"], "asset/itemImg/" . $photo["name"]);
+			move_uploaded_file($photo["tmp_name"], "../../asset/itemImg/" . $photo["name"]);
 
-			$photoURL = "asset/itemImg/" . $photo["name"];
+			$photoURL = "../../asset/itemImg/" . $photo["name"];
 
 			$query = "INSERT INTO item(itemname, photo, description, initialprice, endtime, category_id, status, user_id) values('$name', '$photoURL', '$description', '$price', '$endtime', '$category', 1, $user)";
-			$result = $mysqli->query($query)or die($mysqli->error());
+			$result = $mysqli->query($query)or die('Ошибка '.$mysqli->error());
 
 			if($result){
 				//here didnt solve yet

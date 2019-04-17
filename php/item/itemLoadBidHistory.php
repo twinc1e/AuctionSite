@@ -4,7 +4,7 @@
 		$item_id = $_GET['item_id'];
 
 		$queryBidHis = "SELECT * FROM bidHistory, user WHERE bidHistory.item_id = $item_id AND bidHistory.user_id =user.user_id ORDER BY bidHistory.bidhistory_id DESC";
-		$resultBidHis = $mysqli->query($queryBidHis) or die(mysqli_error());
+		$resultBidHis = $mysqli->query($queryBidHis) or die('Ошибка '.$mysqli->error);
 		$emptyBidHis = (mysqli_num_rows($resultBidHis) == 0? true:false);
 	}
 ?>

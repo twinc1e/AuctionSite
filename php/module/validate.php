@@ -66,7 +66,7 @@
 		// require_once('../core/db.php');
 
 		$query = "SELECT * FROM user WHERE username = '$username'";
-		$result = $mysqli->query($query) or die($mysqli->error());
+		$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error());
 
 		if($result->num_rows==0){
 			array_push($error, "$attr уже существует");
@@ -79,7 +79,7 @@
 			{
 			   array_push($error, "Код ошибки: " . $photo["error"]);
 			}else{
-				if (file_exists("./asset/itemImg/" . $_FILES["photo"]["name"]))
+				if (file_exists("http:/AuctionSite/asset/itemImg/" . $_FILES["photo"]["name"]))
 			     {
 			     	$photo["name"] = "1".$photo["name"];
 			     }
@@ -92,7 +92,7 @@
 	function validateBidPrice($pricebid, $initialprice, &$error, $itemid, $attr){
 			// require_once('php/core/db.php');
 		$query = "SELECT max(price) FROM bidHistory WHERE item_id = '$itemid' ORDER BY bidhistory_id DESC LIMIT 0, 1";
-		$result = $mysqli->query($query) or die($mysqli->error());
+		$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error());
 		$row = $mysqli->fetch_array($result);
 		$pricebidhis = $row['max(price)'];
 		if($initialprice >= $pricebid){

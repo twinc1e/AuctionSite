@@ -1,6 +1,7 @@
 			</div>
 		</div>
-		<script type="text/javascript" src="./asset/hideMsg.js"></script>
+		<?php if($src==null) $src = "http://AuctionSite/js/hideMsg.js";?>
+		<script type="text/javascript" src=<?$src?>></script>
 		<div class="footerWrapper">
 			<div class="footer">
 				<p>&copy; Copyright by student UlSTU</p>

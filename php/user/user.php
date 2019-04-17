@@ -6,8 +6,7 @@
 	if(isset($_GET['view'])=='true' && !empty($_SESSION['user_id'])){
 		$user_id = $_SESSION['user_id'];
 		$queryView = "SELECT * FROM user WHERE user_id = $user_id";
-		$resultView = $mysqli->query($queryView) or die(mysqli_error());
-
+		$resultView = $mysqli->query($queryView) or die('Ошибка '.$mysqli->error);
 		$rowView = mysqli_fetch_array($resultView);
 	}
 
@@ -31,9 +30,9 @@
 		validateTextBox($password, array(3,20), $error, "Пароль", false);
 		/* end of validate */
 
-			if(empty($error)){
-				$query = "INSERT INTO user(username, name, email, password) values('$username', '$name', '$email', '$password')";
-				$result = $mysqli->query($query) or die(mysqli_error());
+			if(empty($error)){//perm = 0 по ТЗ регаться только клиентам
+				$query = "INSERT INTO user(username, name, email, password, permission) values('$username', '$name', '$email', '$password',0)";
+				$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
 				if($result){
 					$_SESSION["notice"] = "Вы успешно зарегистрировались, теперь можете войти";

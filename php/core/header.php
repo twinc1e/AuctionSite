@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	$queryExc = "SELECT * FROM item";
-	$resultExc = $mysqli->query($queryExc) or die(mysqli_error());
+	$resultExc = $mysqli->query($queryExc) or die('Ошибка '.$mysqli->error);
 
 	if(mysqli_num_rows($resultExc) != 0){
 		while($rowExc = mysqli_fetch_array($resultExc))
@@ -9,7 +9,7 @@
 			if(date("Y-m-d H:i") >date($rowExc['endtime'])){
 				$itemExc_id = $rowExc['item_id'];
 				$queryExcHB = "SELECT user_id FROM bidHistory WHERE item_id = $itemExc_id ORDER BY price DESC LIMIT 0, 1";
-				$resultExcHB = $mysqli->query($queryExcHB) or die(mysqli_error());
+				$resultExcHB = $mysqli->query($queryExcHB) or die('Ошибка '.$mysqli->error);
 
 				if(mysqli_num_rows($resultExcHB) != 0){
 					$rowExcHB = mysqli_fetch_array($resultExcHB);
@@ -18,7 +18,7 @@
 					$priceExcHB = 0;
 				}
 				$queryUpExc = "UPDATE item SET status=0, winner='$priceExcHB' WHERE item_id=$itemExc_id";
-				$resultUpExc = $mysqli->query($queryUpExc) or die(mysqli_error());
+				$resultUpExc = $mysqli->query($queryUpExc) or die('Ошибка '.$mysqli->error);
 			}
 		}
 	}
@@ -31,7 +31,7 @@
 		<title>Аукцион "Torgi"</title>
 		<link rel="stylesheet" type="text/css" href="http://AuctionSite/asset/font/bebasneue.css">
 		<link rel="stylesheet" type="text/css" href="http://AuctionSite/asset/style.css" />
-		<script src="./asset/jquery-1.6.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://AuctionSite/js/jquery-1.6.3.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<div class="loginWrapper">
@@ -75,7 +75,7 @@
 								<?php
 								// require_once('function/db.php');
 								$query = "SELECT * FROM category";
-								$result = $mysqli->query($query) or die(mysqli_error());
+								$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
 								while($row = mysqli_fetch_array($result))
 								{
@@ -91,11 +91,11 @@
 								<?php
 								// require_once('function/db.php');
 								$query = "SELECT * FROM category";
-								$result = $mysqli->query($query) or die(mysqli_error());
+								$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
 								while($row = mysqli_fetch_array($result))
 								{
-									echo "<li><a href='../item/category.php?archive=".$row['category_id']."'>" . $row['category_name'] . "</a></li>";
+									echo "<li><a href='http://AuctionSite/php/item/category.php?archive=".$row['category_id']."'>" . $row['category_name'] . "</a></li>";
 								}
 								?>
 							</ul>

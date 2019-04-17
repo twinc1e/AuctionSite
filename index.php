@@ -9,7 +9,7 @@
 <button class = "btn"><span onclick="php/item/auction.php"> Добавить товар </span></button>
 <?php
 	$query = "SELECT * FROM item, category WHERE item.category_id = category.category_id AND status=1 ORDER BY item_id DESC LIMIT 0,10";
-	$result = $mysqli->query($query) or die(mysqli_error());
+	$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
 	if(mysqli_num_rows($result) != 0){
 		while($row = mysqli_fetch_array($result))
@@ -24,7 +24,7 @@
 	}
 ?>
 
-<script type="text/javascript" src="asset/equalHeightCol.js"></script>
+<script type="text/javascript" src="asset/js/equalHeightCol.js"></script>
 <?php
 	require_once('php/core/footer.php');
 ?>

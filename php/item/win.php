@@ -8,14 +8,14 @@ require_once('../core/db.php');
 
 		if($user_id != 0){
 			$query = "UPDATE item SET status=0, winner=$user_id WHERE item_id=$item_id";
-			$result = $mysqli->query($query) or die(mysqli_error());
+			$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
 			if($result){
 				$resultMsg = "Победитель";
 			}
 		}else{
 			$query = "UPDATE item SET status=0, winner=0 WHERE item_id=$item_id";
-			$result = $mysqli->query($query) or die(mysqli_error());
+			$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
 			if($result){
 				$resultMsg =  "НЕ победитель";

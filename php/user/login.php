@@ -14,7 +14,7 @@
 		$_SESSION['errorMsg'] = NULL;
 		$_SESSION['notice'] = NULL;
 		$query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
-		$result = $mysqli->query($query) or die(mysqli_error());
+		$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
 	if(mysqli_num_rows($result)){
 		while($row = mysqli_fetch_array($result))

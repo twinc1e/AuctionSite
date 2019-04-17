@@ -4,14 +4,14 @@
 	require_once('../module/func.php');
 	require_once('../module/validate.php');
 
-	if(!isset($_GET['itemid'])){
+	if(!isset($_GET['ID'])){
 		header('Location: http://AuctionSite/index.php');
 		exit();
 	}
 
-	$itemId = $_GET['itemid'];
+	$itemId = $_GET['ID'];
 	$query = "SELECT * FROM item,user,category WHERE item_id = $itemId AND item.user_id = user.user_id AND item.category_id = category.category_id";
-	$result = $mysqli->query($query) or die(mysqli_error());
+	$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
 	if(mysqli_num_rows($result) == 0){
 		header('Location: http://AuctionSite/index.php');
@@ -36,7 +36,7 @@
 
 		//Получить последнюю ставку
 		$queryHigherBid = "SELECT max(price) FROM bidHistory WHERE item_id = '$item_id' ORDER BY bidhistory_id DESC LIMIT 0, 1";
-		$resultHigherBid = $mysqli->query($queryHigherBid) or die(mysqli_error());
+		$resultHigherBid = $mysqli->query($queryHigherBid) or die('Ошибка '.$mysqli->error());
 		$rowHigherBid = mysqli_fetch_array($resultHigherBid);
 		$priceHigherBid = $rowHigherBid['max(price)'];
 	}
@@ -54,7 +54,7 @@
 		if(empty($error)){
 			$currentUser = $_SESSION['user_id'];
 			$queryBid = "INSERT INTO bidHistory(item_id, user_id, price) values('$item_id', '$currentUser', '$price')";
-			$resultBid = $mysqli->query($queryBid) or die(mysqli_error());
+			$resultBid = $mysqli->query($queryBid) or die('Ошибка '.$mysqli->error());
 			if($resultBid){
 				$prev = $_SERVER['HTTP_REFERER'];
 				$_SESSION["notice"] = "Ставка сделана";
@@ -124,7 +124,7 @@
 			}
 		}else{
 			$queryWinner = "SELECT * FROM bidHistory, user WHERE bidHistory.item_id = $item_id AND bidHistory.user_id =user.user_id ORDER BY bidHistory.bidhistory_id DESC LIMIT 0,1";
-			$resultWinner = $mysqli->query($queryWinner) or die(mysqli_error());
+			$resultWinner = $mysqli->query($queryWinner) or die('Ошибка '.$mysqli->error());
 			if(mysqli_num_rows($resultWinner) != 0){
 				$rowWinner = mysqli_fetch_array($resultWinner);
 				echo "<p><span>Победитель:</span> " . $rowWinner['username'] . "</p>";
@@ -140,5 +140,5 @@
 		Load from itemLoadBidHistory.php via ajax
 	-->
 </div>
-<script type="text/javascript" src="asset/countDown.js"></script>
+<script type="text/javascript" src="../../asset/js/countDown.js"></script>
 <?php require_once('../core/footer.php'); ?>
