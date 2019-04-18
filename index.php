@@ -1,7 +1,7 @@
 <?php
 	require_once('php/core/db.php');
 	$link = 'php/module/message.php';
-	$linku = 'php/user/user.php?view=true';
+	$linku = 'php/user/reg.php';
 	require_once('php/core/header.php');
 ?>
 

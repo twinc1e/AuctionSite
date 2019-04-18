@@ -2,9 +2,9 @@ if($('.error').length!=0 || $('.notice').length!=0){
 	setTimeout(function(){
 		$.ajax({
 		   type: "POST",
-		   url: "asset/hideMsg.php",
+		   url: "http://AuctionSite/php/module/hideMsg.php/hideMsg.php",
 			data: {
-				clear: 1 
+				clear: 1
 			},
 		   success: function(msg){
 		   		$('.error').fadeOut(500, function(){
@@ -17,13 +17,13 @@ if($('.error').length!=0 || $('.notice').length!=0){
 		});
 	},10000);
 }
-	
+
 $("#closeMsg").click(function(){
 	$.ajax({
 	   type: "POST",
-	   url: "asset/hideMsg.php",
+	   url: "http://AuctionSite/php/module/hideMsg.php",
 		data: {
-			clear: 1 
+			clear: 1
 		},
 	   success: function(msg){
 	   		$('.error').fadeOut(500, function(){
@@ -34,8 +34,4 @@ $("#closeMsg").click(function(){
 			});
 	   }
 	});
-});	
-	
-
-	
-	
+});

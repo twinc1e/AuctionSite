@@ -46,7 +46,7 @@ p{
 	clear:both;
 }
 .notice #closeMsg{background:#FF8585; color:#FFF;}
-.error #closeMsg{background:#FFE285;color:#000;}
+.error #closeMsg{background-color: #dc4949;color:#000;}
 #closeMsg{
 	position:absolute;
 	right:0;
@@ -68,15 +68,21 @@ p{
 	/* background:#000; */
 	/* display: inline-flex; */
 }
-.login a, .login form/*.login form p, */{
-	/* float:left; */
+.login a, .login /*form, .login form*/ p{
+	float:left;
 	/* margin-right:25px;
 	line-height:30px; */
 	color:#fff;
 	padding: 0.5rem;
 	text-align: center;
-	display: inherit;/*if inherit so in center, if initial so in aleft and btn on the top/
-}
+	/* display: inherit;if inherit so in center, if initial so in aleft and btn on the top */
+	display: inline-block;
+    /* margin-top: 5px; */
+    /* width: 80px; */
+     padding-right: 5px;
+    padding-left: 5px;
+	}
+
 .login form p input[type="submit"]{
 	/* line-height:30px;*/
 	/*margin-top:5px;*/
@@ -91,12 +97,16 @@ p{
 	overflow:auto;
 }
 .btn {
-	display: inline-block;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+		display: inline-block;
 	float:right;
 	padding-left: 8px;
 	padding-right: 8px;
 	margin-right: 1rem;
 	margin-top: -2rem;
+
 }
 /*Logo*/
 .logo{

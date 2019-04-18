@@ -38,9 +38,8 @@
 			<div class="login">
 				<?php
 					if(isset($_SESSION["user_id"])){
-						if ($linku==null)	$linku = '../user/user.php?view=true';
-						echo "<a href=". $linku .">Личный кабинет ".$_SESSION["username"] . "</a><br>
-						<button class = 'btn'><span onclick='http://AuctionSite/php/user/logout.php'>logout</span></button>";
+						echo "<a href='http://AuctionSite/php/user/reg.php?view=true'>Личный кабинет ".$_SESSION["username"] . "</a><br>
+						<button class = 'btn' onclick='http://AuctionSite/php/user/logout.php'>logout</button>";
 					}else{
 						?>
 						<form action="http://AuctionSite/php/user/login.php" method="post">
@@ -53,11 +52,10 @@
 								<input type="password" name="password" id="password">
 							</p>
 							<p>
-								<input type="submit" id="submit">
+								<input type="submit" id="submit" value="Войти">
 							</p>
 						</form>
-
-						<a href="../user/user.php">Регистрация</a>
+						<button class = 'btn' onclick='http://AuctionSite/php/user/reg.php'>Регистрация</button>
 						<?php
 					}
 				?>

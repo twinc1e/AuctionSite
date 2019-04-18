@@ -43,7 +43,7 @@
 					$_SESSION["errorMsg"] .= $error[$i]."<br/>";
 				}
 				$_SESSION["errorMsg"].= "Заново зарегистрируйтесь, пожалуйста";
-				header('Location: user.php');
+				header('Location: reg.php');
 			}
 	}
 ?>
