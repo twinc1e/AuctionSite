@@ -96,17 +96,14 @@ p{
 	min-height:500px;
 	overflow:auto;
 }
-.btn {
-	-webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
+.btn,input[type="submit"] {
 		display: inline-block;
 	float:right;
 	padding-left: 8px;
 	padding-right: 8px;
 	margin-right: 1rem;
-	margin-top: -2rem;
-
+	/* margin-top: -2rem; */
+	cursor:pointer;
 }
 /*Logo*/
 .logo{

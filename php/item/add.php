@@ -50,7 +50,7 @@
 				$_SESSION["errorMsg"] .= $error[$i]."<br/>";
 			}
 			$_SESSION["errorMsg"] .= "Создайте лот заново, пожалуйста";
-			header('Location: auction.php');
+			header('Location: add.php');
 		}
 	}
 ?>
@@ -60,19 +60,19 @@
 	<form action="" class="form" method="post" enctype="multipart/form-data">
 		<p>
 
-			<label for="name">Item name</label>
+			<label for="name">Название лота</label>
 			<input type="text" name="name" id="name"/>
 		</p>
 		<p>
-			<label for="photo">Photo</label>
+			<label for="photo">Фото</label>
 			<input type="file" name="photo" id="photo" />
 		</p>
 		<p>
-			<label for="price">Price</label>
+			<label for="price">Цена</label>
 			<input type="text" name="price" id="price"/>
 		</p>
 		<p>
-			<label for="endtime">End time</label>
+			<label for="endtime">Конец времени</label>
             <?php
             $format ="Y-m-d\TG:i";//2018-06-07T00:00
             $now_datetime=date($format);
@@ -82,7 +82,7 @@
 
 		</p>
 		<p>
-			<label for="category">Category</label>
+			<label for="category">Категория</label>
 			<select name="category" id="category">
 				<?php
 					$query = "SELECT * FROM category";
@@ -96,7 +96,7 @@
 			</select>
 		</p>
 		<p>
-			<label for="description">Description</label>
+			<label for="description">Описание</label>
 			<textarea id="description" name="description"></textarea>
 		</p>
 		<p>

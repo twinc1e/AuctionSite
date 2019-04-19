@@ -31,7 +31,8 @@
 		<title>Аукцион "Torgi"</title>
 		<link rel="stylesheet" type="text/css" href="http://AuctionSite/asset/font/bebasneue.css">
 		<link rel="stylesheet" type="text/css" href="http://AuctionSite/asset/style.css" />
-		<script src="http://AuctionSite/js/jquery-1.6.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="http://AuctionSite/js/jquery-1.6.3.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="asset/js/funct.js"></script>
 	</head>
 	<body>
 		<div class="loginWrapper">
