@@ -68,7 +68,7 @@
 		$query = "SELECT * FROM user WHERE username = '$username'";
 		$result = $mysqli->query($query) or die($mysqli->error());
 
-		if($mysqli->num_rows($result)){
+		if($result->num_rows){
 			array_push($error, "$attr already exist, please choose other");
 		}
 	}

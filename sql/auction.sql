@@ -31,7 +31,7 @@ CREATE TABLE `bidHistory` (
   `price` double NOT NULL,
   `bidhistory_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`bidhistory_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=78 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
 
 --
 -- Dumping data for table `bidHistory`
