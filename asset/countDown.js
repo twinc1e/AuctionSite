@@ -62,7 +62,6 @@ var clear = function(){
 	clearInterval(intervalId);
 	(function(){
 			//
-
 			//
 			$.ajax({
 			   type: "POST",
