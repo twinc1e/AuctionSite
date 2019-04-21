@@ -17,13 +17,13 @@
 		$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
 	if(mysqli_num_rows($result)){
-		while($row = mysqli_fetch_array($result))
-		{
+		// while(
+		$row = mysqli_fetch_array($result);
+	//)
+		//{
 			$_SESSION['user_id'] = $row['user_id'];
 			$_SESSION['username'] = $row['username'];
-		}
-
-
+		//}
 		header("Location: $prev");
 		exit();
 	}else{

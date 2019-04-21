@@ -40,7 +40,7 @@
 				<?php
 					if(isset($_SESSION["user_id"])){
 						echo "<a href='http://AuctionSite/php/user/reg.php?view=true'>Личный кабинет ".$_SESSION["username"] . "</a><br>
-						<button class = 'btn' onclick='http://AuctionSite/php/user/logout.php'>logout</button>";
+						<button class = 'btn'><a href='http://AuctionSite/php/user/logout.php'>logout</a></button>";
 					}else{
 						?>
 						<form action="http://AuctionSite/php/user/login.php" method="post">
@@ -56,7 +56,7 @@
 								<input type="submit" id="submit" value="Войти">
 							</p>
 						</form>
-						<button class = 'btn' onclick='http://AuctionSite/php/user/reg.php'>Регистрация</button>
+						<button class = 'btn'><a href='http://AuctionSite/php/user/reg.php'>Регистрация</a></button>
 						<?php
 					}
 				?>
