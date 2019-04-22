@@ -32,8 +32,9 @@ CREATE TABLE `bidHistory` (
   `item_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `price` double NOT NULL,
-  `bidhistory_id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `bidhistory_id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`bidhistory_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
 
 --
 -- Дамп данных таблицы `bidHistory`

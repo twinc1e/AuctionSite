@@ -22,7 +22,8 @@ if(time.length == 7){/*h-mm-ss*/
 	second = Number(time.substring(8,10));
 }
 
-var intervalId = setInterval(function(){
+var intervalId = setInterval(
+	function(){
 	if(second == 0){
 		if(hour == 0 && min == 0 && second == 0){
 			clear();
@@ -62,7 +63,6 @@ var clear = function(){
 	clearInterval(intervalId);
 	(function(){
 			//
-
 			//
 			$.ajax({
 			   type: "POST",
