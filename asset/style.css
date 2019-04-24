@@ -5,7 +5,7 @@ a{text-decoration:none; color:#000;}
 /*General*/
 h1{
 	font-family:"font/BebasNeueRegular";
-	/* margin-bottom:10px; */
+	margin-bottom:0.5rem;
 }
 body{
 	min-height:800px;
@@ -68,7 +68,7 @@ p{
 	/* background:#000; */
 	/* display: inline-flex; */
 }
-.login a, .login /*form, .login form*/ p{
+.login p/*.login a, .login form*/{
 	float:left;
 	/* margin-right:25px;
 	line-height:30px; */
@@ -92,12 +92,13 @@ p{
 }
 /*Content*/
 .content{
-	margin-top:30px;
+	margin-top:2rem;
+	margin-left: 2rem;
 	min-height:500px;
 	overflow:auto;
 }
 .btn,input[type="submit"] {
-		display: inline-block;
+	display: inline-block;
 	float:right;
 	padding-left: 8px;
 	padding-right: 8px;
@@ -172,7 +173,7 @@ p{
 
 /*form*/
 .form{
-	width:100%;
+	width:50%;
 }
 .form p{
 	clear:left;

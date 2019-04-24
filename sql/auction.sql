@@ -21,26 +21,26 @@ SET time_zone = "+00:00";
 --
 -- База данных: `auction`
 --
-
+CREATE DATABASE IF NOT EXISTS auction;
 -- --------------------------------------------------------
 
 --
 -- Структура таблицы `bidHistory`
 --
 
-CREATE TABLE `bidHistory` (
+CREATE TABLE IF NOT EXISTS `auction`.`bidHistory` (
   `item_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `price` double NOT NULL,
-  `bidhistory_id` int(11) NOT NULL AUTO_INCREMENT,
+  `bidhistory_id` int(11) NOT NULL AUTO_INCREMENT=80,
   PRIMARY KEY (`bidhistory_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bidHistory`
 --
-
-INSERT INTO `bidHistory` (`item_id`, `user_id`, `price`, `bidhistory_id`) VALUES
+/*https://chartio.com/resources/tutorials/how-to-insert-if-row-does-not-exist-upsert-in-mysql/*/
+INSERT IGNORE INTO `auction`.`bidHistory` (`item_id`, `user_id`, `price`, `bidhistory_id`) VALUES
 (18, 7, 233, 47),
 (18, 5, 222, 46),
 (18, 5, 111, 45),
@@ -88,16 +88,17 @@ INSERT INTO `bidHistory` (`item_id`, `user_id`, `price`, `bidhistory_id`) VALUES
 -- Структура таблицы `category`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE IF NOT EXISTS `auction`.`category` (
   `category_id` int(11) NOT NULL,
-  `category_name` varchar(30) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `category_name` varchar(30) NOT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=24;
 
 --
 -- Дамп данных таблицы `category`
 --
 
-INSERT INTO `category` (`category_id`, `category_name`) VALUES
+INSERT IGNORE INTO `auction`.`category` (`category_id`, `category_name`) VALUES
 (4, 'Arts, Antiques & Collectibles'),
 (5, 'Baby, Kids & Mum '),
 (6, 'Beauty & Personal Care'),
@@ -125,8 +126,8 @@ INSERT INTO `category` (`category_id`, `category_name`) VALUES
 -- Структура таблицы `item`
 --
 
-CREATE TABLE `item` (
-  `item_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `auction`.`item` (
+  `item_id` int(11) NOT NULL AUTO_INCREMENT=31,
   `itemname` varchar(255) NOT NULL,
   `photo` text NOT NULL,
   `description` text NOT NULL,
@@ -135,14 +136,16 @@ CREATE TABLE `item` (
   `category_id` int(11) NOT NULL,
   `status` int(11) NOT NULL COMMENT 'действующий (стоит удалить стб)',
   `user_id` int(11) NOT NULL,
-  `winner` int(11) NOT NULL
+  `winner` int(11) NOT NULL,
+  PRIMARY KEY (`item_id`),
+  FOREIGN KEY (`category_id`) REFERENCES `category`(`category_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Дамп данных таблицы `item`
 --
 
-INSERT INTO `item` (`item_id`, `itemname`, `photo`, `description`, `initialprice`, `endtime`, `category_id`, `status`, `user_id`, `winner`) VALUES
+INSERT IGNORE INTO `auction`.`item` (`item_id`, `itemname`, `photo`, `description`, `initialprice`, `endtime`, `category_id`, `status`, `user_id`, `winner`) VALUES
 (17, 'ipad2', '../../asset/itemImg/step0-ipad-gallery-image4.png', 'this is an ipad2, top rate tablet device of 2010 and 2011, ranking 4-5(full star) across top review website. Bid now start from just RM23.33 ringit!!!', 23.33, '2011-09-22 11:00', 12, 0, 9, 7),
 (18, 'imac', '../../asset/itemImg/imac.jpg', 'Imac, the one stop desktop for all ppl ranging from student to pro carrer worker, bid now start from RM100', 100, '2011-09-12 14:12', 12, 0, 9, 5),
 (19, 'Macbook Pro', '../../asset/itemImg/macbookpro.jpg', 'Macbook Pro, ur fav laptop and top ranking laptop since appple release macbook pro.', 88.88, '2011-10-12 03:14', 11, 0, 5, 0),
@@ -164,20 +167,21 @@ INSERT INTO `item` (`item_id`, `itemname`, `photo`, `description`, `initialprice
 -- Структура таблицы `user`
 --
 
-CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `auction`.`user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT=12,
   `username` varchar(20) NOT NULL,
   `name` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(30) NOT NULL,
-  `permission` int(11) DEFAULT '0'
+  `permission` int(11) DEFAULT '0',
+  PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Дамп данных таблицы `user`
 --
 
-INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `password`, `permission`) VALUES
+INSERT IGNORE INTO `auction`.`user` (`user_id`, `username`, `name`, `email`, `password`, `permission`) VALUES
 (1, 'dev', 'devlim', 'me@me.com', 'devdev', 2),
 (5, 'devlim', 'lim', 'lim@lim.com', '1234', 1),
 (7, 'don', 'donknow', 'don@don.com', 'dondon', 0),
@@ -191,27 +195,28 @@ INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `password`, `permiss
 --
 -- Индексы таблицы `bidHistory`
 --
-ALTER TABLE `bidHistory`
-  ADD PRIMARY KEY (`bidhistory_id`);
-
+-- IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+-- WHERE CONSTRAINT_TYPE = 'PRIMARY KEY' AND TABLE_NAME = 'bidHistory' AND TABLE_SCHEMA ='auction')
+  -- ALTER TABLE `auction`.`bidHistory`
+  -- ADD PRIMARY KEY (`bidhistory_id`);
 --
 -- Индексы таблицы `category`
 --
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`category_id`);
+-- ALTER TABLE `auction`.`category`
+--   ADD PRIMARY KEY (`category_id`);
 
 --
 -- Индексы таблицы `item`
 --
-ALTER TABLE `item`
-  ADD PRIMARY KEY (`item_id`),
-  ADD KEY `category_id` (`category_id`);
+-- ALTER TABLE `auction`.`item`
+--   ADD PRIMARY KEY (`item_id`),
+  -- ADD foreign KEY `category_id` (`category_id`);
 
 --
 -- Индексы таблицы `user`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
+-- ALTER TABLE `auction`.`user`
+--   ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -220,26 +225,26 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT для таблицы `bidHistory`
 --
-ALTER TABLE `bidHistory`
-  MODIFY `bidhistory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+-- ALTER TABLE `auction`.`bidHistory`
+--   MODIFY `bidhistory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
 --
-ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+-- ALTER TABLE `auction`.`category`
+--   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT для таблицы `item`
 --
-ALTER TABLE `item`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+-- ALTER TABLE `auction`.`item`
+--   MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
-ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+-- ALTER TABLE `auction`.`user`
+--   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
