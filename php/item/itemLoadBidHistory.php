@@ -1,6 +1,6 @@
 <?php
 	if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
-		require_once('function/db.php');
+		require_once('../core/db.php');
 		$item_id = $_GET['item_id'];
 
 		$queryBidHis = "SELECT * FROM bidHistory, user WHERE bidHistory.item_id = $item_id AND bidHistory.user_id =user.user_id ORDER BY bidHistory.bidhistory_id DESC";

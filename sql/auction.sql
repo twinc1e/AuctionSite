@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
--- https://www.phpmyadmin.net/
+-- version 4.4.15.7
+-- http://www.phpmyadmin.net
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Апр 13 2019 г., 13:07
--- Версия сервера: 5.5.58
--- Версия PHP: 5.5.38
+-- Host: 127.0.0.1:3306
+-- Generation Time: May 02, 2019 at 09:22 AM
+-- Server version: 5.5.50
+-- PHP Version: 5.3.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `auction`
+-- Database: `auction`
 --
 CREATE DATABASE IF NOT EXISTS auction;
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `bidHistory`
+-- Table structure for table `bidHistory`
 --
 
 CREATE TABLE IF NOT EXISTS `auction`.`bidHistory` (
@@ -37,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `auction`.`bidHistory` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `bidHistory`
+-- Dumping data for table `bidHistory`
 --
 /*https://chartio.com/resources/tutorials/how-to-insert-if-row-does-not-exist-upsert-in-mysql/*/
 INSERT IGNORE INTO `auction`.`bidHistory` (`item_id`, `user_id`, `price`, `bidhistory_id`) VALUES
@@ -85,7 +83,7 @@ INSERT IGNORE INTO `auction`.`bidHistory` (`item_id`, `user_id`, `price`, `bidhi
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `category`
+-- Table structure for table `category`
 --
 
 CREATE TABLE IF NOT EXISTS `auction`.`category` (
@@ -95,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `auction`.`category` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=24;
 
 --
--- Дамп данных таблицы `category`
+-- Dumping data for table `category`
 --
 
 INSERT IGNORE INTO `auction`.`category` (`category_id`, `category_name`) VALUES
@@ -123,7 +121,7 @@ INSERT IGNORE INTO `auction`.`category` (`category_id`, `category_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `item`
+-- Table structure for table `item`
 --
 
 CREATE TABLE IF NOT EXISTS `auction`.`item` (
@@ -134,7 +132,6 @@ CREATE TABLE IF NOT EXISTS `auction`.`item` (
   `initialprice` double NOT NULL,
   `endtime` char(20) DEFAULT NULL,
   `category_id` int(11) NOT NULL,
-  `status` int(11) NOT NULL COMMENT 'действующий (стоит удалить стб)',
   `user_id` int(11) NOT NULL,
   `winner` int(11) NOT NULL,
   PRIMARY KEY (`item_id`),
@@ -164,7 +161,7 @@ INSERT IGNORE INTO `auction`.`item` (`item_id`, `itemname`, `photo`, `descriptio
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `auction`.`user` (
@@ -178,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `auction`.`user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Дамп данных таблицы `user`
+-- Dumping data for table `user`
 --
 
 INSERT IGNORE INTO `auction`.`user` (`user_id`, `username`, `name`, `email`, `password`, `permission`) VALUES
@@ -189,11 +186,11 @@ INSERT IGNORE INTO `auction`.`user` (`user_id`, `username`, `name`, `email`, `pa
 (10, 'try', 'tryMe', 'tryme@me.com', 'try', 0);
 
 --
--- Индексы сохранённых таблиц
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `bidHistory`
+-- Indexes for table `bidHistory`
 --
 -- IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
 -- WHERE CONSTRAINT_TYPE = 'PRIMARY KEY' AND TABLE_NAME = 'bidHistory' AND TABLE_SCHEMA ='auction')
@@ -223,7 +220,7 @@ INSERT IGNORE INTO `auction`.`user` (`user_id`, `username`, `name`, `email`, `pa
 --
 
 --
--- AUTO_INCREMENT для таблицы `bidHistory`
+-- AUTO_INCREMENT for table `bidHistory`
 --
 -- ALTER TABLE `auction`.`bidHistory`
 --   MODIFY `bidhistory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;

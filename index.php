@@ -8,7 +8,7 @@
 <h1>Действующий аукцион</h1>
 <button class = "btn"><a href="php/item/add.php"> Добавить лот </a></button>
 <?php
-	$query = "SELECT * FROM item, category WHERE item.category_id = category.category_id AND status=1 ORDER BY item_id DESC LIMIT 0,10";
+	$query = "SELECT * FROM item, category WHERE item.category_id = category.category_id ORDER BY item_id DESC LIMIT 0,10";
 	$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
 	if(mysqli_num_rows($result) != 0){
