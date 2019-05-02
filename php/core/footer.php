@@ -1,6 +1,6 @@
 			</div>
 		</div>
-		<?php if($src==null) $src = "http://AuctionSite/js/hideMsg.js";?>
+		<?php if($src==null) $src = "http://AuctionSite/asset/js/hideMsg.js";?>
 		<script type="text/javascript" src=<?$src?>></script>
 		<div class="footerWrapper">
 			<div class="footer">
