@@ -7,7 +7,7 @@
 		if($category_id == 'all'){
 			$query = "SELECT * FROM item, category WHERE category.category_id = item.category_id ORDER BY item.item_id DESC";
 		}else{
-			$query = "SELECT * FROM item, category WHERE category.category_id = '$category_id' AND item.category_id = '$category_id' AND status = 1 ORDER BY item.item_id DESC";
+			$query = "SELECT * FROM item, category WHERE category.category_id = '$category_id' AND item.category_id = '$category_id' ORDER BY item.item_id DESC";
 		}
 		$result = $mysqli->query($query) or die('Ошибка '.'Ошибка '.$mysqli->error);
 	}
