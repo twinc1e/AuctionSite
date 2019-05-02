@@ -27,7 +27,7 @@
 		$categoryName = $row['category_name'];
 		$username = $row['username'];
 		$usernameId = $row['user_id'];
-		$itemStatus = $row['status'];
+
 
 		//Calculate left time
 		$today = date("Y-m-d H:i");
@@ -89,22 +89,18 @@
 			}
 		?>
 	</p>
-	<?php
-		if($itemStatus != 0){
-			?>
+
 				<p id="hms">
 					<span>Осталось времени (Hours:Minutes:Second):</span>
 					<span id="hour"></span>:<span id="min"></span>:<span id="second"></span>
 					<input type="hidden" id="timeleftHidden" value="<?php echo $leftime; ?>">
 				</p>
-			<?php
-		}
-	?>
+
 	<p><span>Конец через:</span> <?php echo $endtime; ?></p>
 	<p><span>Описание:</span> <?php echo $description; ?></p>
 
 	<?php
-		if($itemStatus != 0){
+
 			if(isset($_SESSION["user_id"]) && $_SESSION["user_id"] == $usernameId){
 				?>
 					<form id="biddingForm" action="#" method="post">
@@ -122,7 +118,7 @@
 					</form>
 				<?php
 			}
-		}else{
+		else{
 			$queryWinner = "SELECT * FROM bidHistory, user WHERE bidHistory.item_id = $item_id AND bidHistory.user_id =user.user_id ORDER BY bidHistory.bidhistory_id DESC LIMIT 0,1";
 			$resultWinner = $mysqli->query($queryWinner) or die('Ошибка '.$mysqli->error());
 			if(mysqli_num_rows($resultWinner) != 0){

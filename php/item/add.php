@@ -35,7 +35,7 @@
 
 			$photoURL = "../../asset/itemImg/" . $photo["name"];
 
-			$query = "INSERT INTO item(itemname, photo, description, initialprice, endtime, category_id, status, user_id) values('$name', '$photoURL', '$description', '$price', '$endtime', '$category', 1, $user)";
+			$query = "INSERT INTO item(itemname, photo, description, initialprice, endtime, category_id, user_id) values('$name', '$photoURL', '$description', '$price', '$endtime', '$category', 1, $user)";
 			$result = $mysqli->query($query)or die('Ошибка '.$mysqli->error());
 
 			if($result){
