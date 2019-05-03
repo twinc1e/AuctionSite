@@ -15,8 +15,8 @@
 		while($row = mysqli_fetch_array($result))
 		{
 			echo "<div class='item'>";
-			echo "<div class='itemImage'><a href='php/item/item.php?itemid=" . $row['item_id'] . "'><img src='" . $row['photo'] . "' alt='" . $row['itemname'] . "'/></a></div>";
-			echo "<p><span class='itemname'>Name:</span><a href='php/item/item.php?itemid=" . $row['item_id'] . "'>" . $row['itemname'] . "</a></p>";
+			echo "<div class='itemImage'><a href='php/item/item.php?ID=" . $row['item_id'] . "'><img src='" . $row['photo'] . "' alt='" . $row['itemname'] . "'/></a></div>";
+			echo "<p><span class='itemname'>Name:</span><a href='php/item/item.php?ID=" . $row['item_id'] . "'>" . $row['itemname'] . "</a></p>";
 			echo "<p><span>End time:</span> " . $row['endtime'] . "</p>";
 			echo "<p><span class='itemcategory'>Category:</span><a href='php/category.php?category=" . $row['category_id'] . "'>" . $row['category_name'] . "</a></p>";
 			echo "</div>";
