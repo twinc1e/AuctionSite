@@ -104,8 +104,11 @@ p{
 	padding-left: 8px;
 	padding-right: 8px;
 	margin-right: 1rem;
-	/* margin-top: -2rem; */
 	cursor:pointer;
+}
+div.btn{
+	margin-top: -2rem;
+	background-color: #1ea9ac;
 }
 /*Logo*/
 .logo{

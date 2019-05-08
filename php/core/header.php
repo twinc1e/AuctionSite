@@ -56,7 +56,9 @@
 								<input type="submit" id="submit" value="Войти">
 							</p>
 						</form>
-						<button class = 'btn'><a href='http://AuctionSite/php/user/reg.php'>Регистрация</a></button>
+						<p>
+							<button class = 'btn'><a href='http://AuctionSite/php/user/reg.php'>Регистрация</a></button>
+						</p>
 						<?php
 					}
 				?>
