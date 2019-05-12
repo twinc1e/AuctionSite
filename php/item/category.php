@@ -35,9 +35,9 @@
 		$resultCat = $mysqli->query($queryCat) or die('Ошибка '.$mysqli->error);
 		if(mysqli_num_rows($resultCat)!=0){
 			$rowCat = mysqli_fetch_array($resultCat);
-			echo "Категория: ".$rowCat['category_name'];
+			echo "Анонс: ".$rowCat['category_name'];
 		}else{
-			echo "Категория: ВСЕ";
+			echo "Анонс лотов: ВСЕ";
 		}
 	}
 	if(!empty($archive_id)){

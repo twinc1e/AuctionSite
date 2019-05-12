@@ -39,8 +39,8 @@
 			<div class="login">
 				<?php
 					if(isset($_SESSION["user_id"])){
-						echo "<a href='http://AuctionSite/php/user/reg.php?view=true'>Личный кабинет ".$_SESSION["username"] . "</a><br>
-						<button class = 'btn'><a href='http://AuctionSite/php/user/logout.php'>logout</a></button>";
+						echo "<a href='http://AuctionSite/php/user/reg.php?view=true'>Личный кабинет ".$_SESSION["username"] . "</a>
+						<button class = 'btn'><a href='http://AuctionSite/php/user/logout.php'>Выйти</a></button>";
 					}else{
 						?>
 						<form action="http://AuctionSite/php/user/login.php" method="post">
