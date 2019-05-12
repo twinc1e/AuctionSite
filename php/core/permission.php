@@ -1,4 +1,4 @@
-<?
+<? /*Файл разрешения(permission) прав доступа*/
 //echo $permission ." ". $userinfo['Permission'];
 //var_dump($userinfo);
 if ($permission > $userinfo['Permission']) {

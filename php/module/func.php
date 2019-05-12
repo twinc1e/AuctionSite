@@ -34,16 +34,7 @@
 	    return $hms;
 
 	  }
-
-		function export()
-		{
-			//стандартный заголовок, которого обычно хватает
-			header('Content-Type: application/vnd.ms-excel; charset=utf-8');
-			header("Content-Disposition: attachment;filename=sale_receipt.pdf");
-			header("Content-Transfer-Encoding: binary ");
-
-		}
-
+		require('fpdf.php');
     class TEmail
     {
         public $from_email;

@@ -54,18 +54,18 @@
 		echo "<p>Пользователь: " . $rowView['username'] . "</p>";
 		echo "<p>Имя: " . $rowView['name'] . "</p>";
 		echo "<p>Эл.почта: " . $rowView['email'] . "</p>";
-		//Чек таблица в pdf
-		require('../module/fpdf.php');
+		//-------Чек таблица в pdf-----------------
+		require('../module/func.php');
+		echo "<button class = 'btn'><a href='http://AuctionSite/asset/itemImage/logo.jpg'>Получить чек </a></button>";
 		$pdf=new PDF();
-//Заголовки столбцов
-$header=array('Country','Capital','Area (sq km)','Pop. (thousands)');
-//Загрузка данных
-$data=$pdf->LoadData('countries.txt');
-$pdf->SetFont('Arial','',14);
-$pdf->AddPage();
-$pdf->ImprovedTable($header,$data);
-$pdf->Output("For_winner.pdf");
-		echo "<button class = 'btn'><a href=''>Получить чек </a></button>";
+		//Заголовки столбцов
+		$header=array('Наименование, Количество, Цена, Сумма');
+		//Загрузка данных
+	$data=$pdf->LoadData(/*из бд нужные данные в таблицу*/);
+		$pdf->SetFont('Arial','',14);
+		$pdf->AddPage();
+		$pdf->ImprovedTable($header,$data);
+		$pdf->Output("For_winner.pdf");
 	}else{
 		?>
 		<h1>Регистрация</h1>

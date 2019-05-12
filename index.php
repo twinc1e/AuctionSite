@@ -27,6 +27,5 @@
 	//}
 
 	require_once('php/core/footer.php');
-	mysqli_close($db);
 ?>
 ?>
