@@ -9,8 +9,13 @@
 						AND bidHistory.user_id=7 GROUP BY item.item_id";
 
 	$result = $mysqli->query($query)or die('Ошибка '.$mysqli->error);
-	if(mysqli_num_rows($result) != 0)
-		$data = mysqli_fetch_array($result);
+	$count=mysqli_num_rows($result);
+	$data=[];
+		if($count != 0)
+			for($i=0;$i<$count;$i++){
+		 		$data[i]=mysqli_fetch_array($result);
+			}
+			print_r($data);
 
 	if(isset($_GET['view'])=='true' && !empty($_SESSION['user_id'])){
 		$user_id = $_SESSION['user_id'];
@@ -67,7 +72,8 @@
 		//-------Чек таблица в pdf-----------------
 		require('../module/func.php');
 		echo "<button class = 'btn'><a href='' onclick='send()'>Получить чек </a></button>";
-		printToPDF($data);
+		var_dump("all_",array_values($data));
+		printToPDF(array_values($data));
 	}else{
 
 		?>

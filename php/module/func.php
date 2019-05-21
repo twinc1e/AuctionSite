@@ -113,12 +113,13 @@
 			        $this->Cell($w[$i],7,$header[$i],1);//,0,'C'
 			    $this->Ln();
 			    //Данные
+					var_dump($data);
 			    foreach($data as $row)
 			    {
 			        $this->Cell($w[0],6,$row[0],1,'LR');
 			        $this->Cell($w[1],6,$row[1],1,'LR');//количество
-			        $this->Cell($w[2],6,$row[2],1,'LR',0,'R');//
-			        $this->Cell($w[3],6,$row[3],1,'LR',0,'R');
+			        $this->Cell($w[2],6,$row[2],1,'LR');//
+			        $this->Cell($w[3],6,$row[2],1,'LR');
 			        $this->Ln();
 			    }
 			    //Линия закрытия (последняя линия)
@@ -144,21 +145,21 @@
 	}
 }
 
-function printToPDF($data=null)
+function printToPDF($data)
 {
 	define('FPDF_FONTPATH','font/');
 //require('printing.class.php');
 	$pdf=new PDF();
 	//http://auctionsite/asset/itemImg/logo.jpg
 	//Заголовки столбцов
-	$header=array('Name, Count, Price, Summary');
+	$header=['ID', 'Name', 'Price', 'Summary'];
 	//Загрузка данных
 //$data=$pdf->LoadData(/*из бд нужные данные в txt файле*/);
  	$pdf->AddFont('ArialMT','','arial.php');
  	$pdf->SetFont('ArialMT','',14);
 	$pdf->AddPage();
 	//var_dump("db = ",$data,"!");
-	$pdf->simplepdfTable($header,$data);
+	$pdf->pdfTable($header,$data);
 	// $pdf->pdfTable($header,$data);
 	// $pdf->Output();
 

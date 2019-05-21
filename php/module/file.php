@@ -20,7 +20,7 @@
   	$result = $mysqli->query($query)or die('Error: '.$mysqli->error);
     $count=mysqli_num_rows($result);
     if( $count!= 0)
-  		while($data = mysqli_fetch_array($result)){
+  		while($row = mysqli_fetch_array($result)){
           echo '<tr>
           <td>'.$row['Name'].' </td>
           <td>1 </td>
