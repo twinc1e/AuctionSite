@@ -66,13 +66,18 @@
 		class PDF extends FPDF
 		{
 		//Загрузка данных
-		function LoadData($file)
+		function LoadData($file=null)
 		{
 		    //Чтение строк из файла
-		    $lines=file($file);
-		    $data=array();
+		    //$lines=file($file);
+		    $data=array();/*
 		    foreach($lines as $line)
-		        $data[]=explode(';',chop($line));
+		      $data[]=explode(';',chop($line));*/
+				//	из бд
+				$query = "SELECT item.itemname, bidHistory.price FROM item, bidHistory WHERE bidHistory.item_id = item.item_id AND item.winner=bidHistory.user_id ORDER BY item.item_id DESC";
+				$result = $mysqli->query($query)or die('Ошибка '.$mysqli->error);
+				if(mysqli_num_rows($result) != 0)
+					$data = mysqli_fetch_array($result);
 		    return $data;
 		}
 		//Создание таблицы с чеком
@@ -86,9 +91,9 @@
 		    foreach($data as $row)
 		    {
 		        $this->Cell($w[0],6,$row[0],'LR');
-		        $this->Cell($w[1],6,$row[1],'LR');
-		        $this->Cell($w[2],6,number_format($row[2]),'LR',0,'R');
-		        $this->Cell($w[3],6,number_format($row[3]),'LR',0,'R');
+		        $this->Cell($w[1],6,sum($row[0]),'LR');//количество
+		        $this->Cell($w[2],6,number_format($row[1]),'LR',0,'R');
+		        $this->Cell($w[3],6,sum(number_format($row[1])),'LR',0,'R');
 		        $this->Ln();
 		    }
 		    //Линия закрытия (последняя линия)
