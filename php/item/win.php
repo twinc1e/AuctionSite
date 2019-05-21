@@ -7,12 +7,11 @@ require_once('../module/func.php');
 		$item_id = $_POST['item_id'];
 		$resultMsg;
 		$email;
-		$from_email = 'torgi@mail.ru';
-		$from_name = 'Сайт АУКЦИОН';
-		$email_subject='Чек победителя';
-		$email_msg="";
+		// $from_email = 'torgi@mail.ru';
+		// $from_name = 'Сайт АУКЦИОН';
+		// $email_subject='Чек победителя';
+		// $email_msg="";
 		$email_name;
-		include 'function/db.php';
 
 		if($user_id != 0){
 			$query = "UPDATE item SET winner=$user_id WHERE item_id=$item_id";
@@ -41,20 +40,20 @@ require_once('../module/func.php');
           $str=iconv($data_charset,$send_charset.'//IGNORE',$str);
       return ('=?'.$send_charset.'?B?'.base64_encode($str).'?=');
   }
-
-        $emailgo = new TEmail; // инициaлизируeм супeр клaсс oтпрaвки
-        //$emailgo->from_email= $from_email; // oт кoгo
-        $emailgo->from_name= $from_name;
-        $emailgo->to_email= $email; // кoму
-        $emailgo->to_name= $email_name;
-        $emailgo->subject= $email_subject; // тeмa
-        $emailgo->body= 'Поздравляю, вы победили! Вы можете приобрести товар по чеку в вашем личном кабинете по ссылке:'
-												+$email_msg; // сooбщeниe*/
-        // $emailgo->to_email= 'idrisov.rad@gmail.com';
-        // $emailgo->to_name= 'kek';
-        // $emailgo->subject= 'lul'; // тeмa
-        // $emailgo->body= 'lul'; // сooбщeниe
-        $emailgo->send(); // oтпрaвляeм
+        send();
+        // $emailgo = new TEmail; // инициaлизируeм супeр клaсс oтпрaвки
+        // //$emailgo->from_email= $from_email; // oт кoгo
+        // $emailgo->from_name= $from_name;
+        // $emailgo->to_email= $email; // кoму
+        // $emailgo->to_name= $email_name;
+        // $emailgo->subject= $email_subject; // тeмa
+        // $emailgo->body= 'Поздравляю, вы победили! Вы можете приобрести товар по чеку в вашем личном кабинете по ссылке:'
+				// 								+$email_msg; // сooбщeниe*/
+        // // $emailgo->to_email= 'idrisov.rad@gmail.com';
+        // // $emailgo->to_name= 'kek';
+        // // $emailgo->subject= 'lul'; // тeмa
+        // // $emailgo->body= 'lul'; // сooбщeниe
+        // $emailgo->send(); // oтпрaвляeм
 		echo $resultMsg;
 	}
 ?>

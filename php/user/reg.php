@@ -3,6 +3,15 @@
 	require_once('../core/db.php');
 	require_once('../module/validate.php');
 
+	$query = "SELECT item.item_id as Num, item.itemname as Name, MAX(bidHistory.price) as Price
+						FROM item, bidHistory
+						WHERE item.item_id=bidHistory.item_id AND item.winner=bidHistory.user_id
+						AND bidHistory.user_id=7 GROUP BY item.item_id";
+
+	$result = $mysqli->query($query)or die('Ошибка '.$mysqli->error);
+	if(mysqli_num_rows($result) != 0)
+		$data = mysqli_fetch_array($result);
+
 	if(isset($_GET['view'])=='true' && !empty($_SESSION['user_id'])){
 		$user_id = $_SESSION['user_id'];
 		$queryView = "SELECT * FROM user WHERE user_id = $user_id";
@@ -54,19 +63,13 @@
 		echo "<p>Пользователь: " . $rowView['username'] . "</p>";
 		echo "<p>Имя: " . $rowView['name'] . "</p>";
 		echo "<p>Эл.почта: " . $rowView['email'] . "</p>";
+
 		//-------Чек таблица в pdf-----------------
 		require('../module/func.php');
-		echo "<button class = 'btn'><a href='http://AuctionSite/asset/itemImage/logo.jpg'>Получить чек </a></button>";
-		$pdf=new PDF();
-		//Заголовки столбцов
-		$header=array('Наименование, Количество, Цена, Сумма');
-		//Загрузка данных
-	$data=$pdf->LoadData(/*из бд нужные данные в таблицу*/);
-		$pdf->SetFont('Arial','',14);
-		$pdf->AddPage();
-		$pdf->ImprovedTable($header,$data);
-		$pdf->Output("For_winner.pdf");
+		echo "<button class = 'btn'><a href='' onclick='send()'>Получить чек </a></button>";
+		printToPDF($data);
 	}else{
+
 		?>
 		<h1>Регистрация</h1>
 		<form action="" class="form" method="post">
