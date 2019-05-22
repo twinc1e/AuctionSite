@@ -5,9 +5,9 @@
 	if(isset($_GET['category'])){
 		$category_id = $_GET['category'];
 		if($category_id == 'all'){
-			$query = "SELECT * FROM item, category WHERE category.category_id = item.category_id AND status = 1 ORDER BY item.item_id DESC";
+			$query = "SELECT * FROM item, category WHERE category.category_id = item.category_id ORDER BY item.item_id DESC";
 		}else{
-			$query = "SELECT * FROM item, category WHERE category.category_id = '$category_id' AND item.category_id = '$category_id' AND status = 1 ORDER BY item.item_id DESC";
+			$query = "SELECT * FROM item, category WHERE category.category_id = '$category_id' AND item.category_id = '$category_id' ORDER BY item.item_id DESC";
 		}
 		$result = $mysqli->query($query) or die('Ошибка '.'Ошибка '.$mysqli->error);
 	}
@@ -15,9 +15,9 @@
 	if(isset($_GET['archive'])){
 		$archive_id = $_GET['archive'];
 		if($archive_id == 'all'){
-			$query = "SELECT * FROM item, category WHERE category.category_id = item.category_id AND status = 0 ORDER BY item.item_id DESC";
+			$query = "SELECT * FROM item, category WHERE category.category_id = item.category_id ORDER BY item.item_id DESC";
 		}else{
-			$query = "SELECT * FROM item, category WHERE category.category_id = '$archive_id' AND item.category_id = '$archive_id' AND status = 0 ORDER BY item.item_id DESC";
+			$query = "SELECT * FROM item, category WHERE category.category_id = '$archive_id' AND item.category_id = '$archive_id'ORDER BY item.item_id DESC";
 		}
 		$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 	}

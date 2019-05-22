@@ -17,7 +17,7 @@
 				}else{
 					$priceExcHB = 0;
 				}
-				$queryUpExc = "UPDATE item SET status=0, winner='$priceExcHB' WHERE item_id=$itemExc_id";
+				$queryUpExc = "UPDATE item SET winner='$priceExcHB' WHERE item_id=$itemExc_id";
 				$resultUpExc = $mysqli->query($queryUpExc) or die('Ошибка '.$mysqli->error);
 			}
 		}
