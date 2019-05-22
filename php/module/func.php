@@ -35,8 +35,6 @@
 
 	  }
 
-		require('..\..\asset\tfpdf.php');
-
     class TEmail
     {
         public $from_email;
@@ -65,10 +63,10 @@
 					$emailgo->body= 'Поздравляю, вы победили! Вы можете приобрести товар по чеку в вашем личном кабинете по ссылке:'
 													+$email_msg; // сooбщeниe*/
 					$emailgo->send(); // oтпрaвляeм
-
         }
     }
 
+		require('..\..\asset\tfpdf.php');
 		class PDF extends tFPDF
 		{
 		//Загрузка данных ----didn't use----
@@ -87,22 +85,22 @@
 				// 	$data = mysqli_fetch_array($result);
 		    return $data;
 		}
-		function simplepdfTable($header,$data)
-		{
-				//Заголовок
-			foreach($header as $col)
-					$this->Cell(40,7,$col,1);
-			$this->Ln();
-	 //var_dump($header,"----",$data);
-			//Данные
-			foreach($data as $row)
-			{
-					for($col=0;$col<count($row);$col++)
-					//foreach($row as $col)
-							$this->Cell(40,6,$row[$col],1);
-					$this->Ln();
-			}
-		}
+		// function simplepdfTable($header,$data)
+		// {
+		// 		//Заголовок
+		// 	foreach($header as $col)
+		// 			$this->Cell(40,7,$col,1);
+		// 	$this->Ln();
+	 // //var_dump($header,"----",$data);
+		// 	//Данные
+		// 	foreach($data as $row)
+		// 	{
+		// 			for($col=0;$col<count($row);$col++)
+		// 			//foreach($row as $col)
+		// 					$this->Cell(40,6,$row[$col],1);
+		// 			$this->Ln();
+		// 	}
+		// }
 
 		function pdfTable($header,$data)
 		{//Создание таблицы с чеком
@@ -113,7 +111,7 @@
 			        $this->Cell($w[$i],7,$header[$i],1);//,0,'C'
 			    $this->Ln();
 			    //Данные
-					var_dump($data);
+					//var_dump('my',$data);
 			    foreach($data as $row)
 			    {
 			        $this->Cell($w[0],6,$row[0],1,'LR');
