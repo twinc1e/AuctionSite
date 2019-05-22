@@ -2,12 +2,12 @@
 	session_start();
 	require_once('../core/db.php');
 	require_once('../module/validate.php');
-
+	require_once('../module/fpdf.php');
+$user = $_SESSION["user_id"];
 	$query = "SELECT item.item_id as Num, item.itemname as Name, MAX(bidHistory.price) as Price
 						FROM item, bidHistory
 						WHERE item.item_id=bidHistory.item_id AND item.winner=bidHistory.user_id
-						AND bidHistory.user_id=7 GROUP BY item.item_id";
-
+						AND bidHistory.user_id = $user GROUP BY item.item_id";
 	$result = $mysqli->query($query)or die('Ошибка '.$mysqli->error);
 	$data=array();
 		//if(count($result) != 0)
@@ -71,10 +71,8 @@
 		echo "<p>Эл.почта: " . $rowView['email'] . "</p>";
 
 		//-------Чек таблица в pdf-----------------
-		require('../module/func.php');
-		echo "<button class = 'btn'><a href='' onclick='send()'>Получить чек </a></button>";
+		echo "<button class = 'btn'><a href='' onclick='printToPDF($data)'>Получить чек </a></button>";
 		//var_dump("all_",$data);
-		printToPDF($data);
 	}else{
 
 		?>

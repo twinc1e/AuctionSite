@@ -212,6 +212,13 @@ div.btn{
 	float:right;
 	width:500px;
 }
+.itemdesc #hms{
+	font-size: x-large;
+	/* background: red;
+    opacity: 0.8;
+    color: white; */
+    text-align: center;
+}
 .itemdesc p span{
 	color:#0050B8;
 	display:initial;
