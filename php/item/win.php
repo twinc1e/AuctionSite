@@ -26,16 +26,15 @@ require_once('../module/func.php');
                 $email_assoc=$result->fetch_assoc();
                 $email=$email_assoc['email'];
                 $email_name=$email_assoc['name'];
+				        send($email,$email_name);
             }
 		}else{
 			$query = "UPDATE item SET winner=0 WHERE item_id=$item_id";
 			$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
-
 			if($result){
 				$resultMsg =  "НЕ победитель";
 			}
 		}
-        send();
         // $emailgo = new TEmail; // инициaлизируeм супeр клaсс oтпрaвки
         // //$emailgo->from_email= $from_email; // oт кoгo
         // $emailgo->from_name= $from_name;
