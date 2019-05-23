@@ -51,7 +51,7 @@
 				}
 ?>
 
-	<script type="text/javascript" src="../../asset/js/countDown.js"></script>
+	<script type="text/javascript" src="../../js/countDown.js"></script>
 <h1>Действующий аукцион</h1>
 <?php
 	if(isset($_SESSION["user_id"]) && $_SESSION["permission"] ==2 && mysqli_num_rows($result)<=1)

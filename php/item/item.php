@@ -106,5 +106,5 @@
 		Load from itemLoadBidHistory.php via ajax
 	-->
 </div>
-<!-- <script type="text/javascript" src="../../asset/js/countDown.js"></script> -->
+<!-- <script type="text/javascript" src="../../js/countDown.js"></script> -->
 <?php require_once('../core/footer.php'); ?>
