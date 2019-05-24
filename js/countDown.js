@@ -80,9 +80,9 @@ var clear = function(){
 					}
 
 			   		if(msg == "winner"){
-						$('.itemdesc').append("<p id='winner'><span>Winner: </span>"+$(".bidhistory table tbody tr").find("td").eq(0).html()+"</p>");
+						$('.itemdesc').append("<p id='winner'><span>Победитель: </span>"+$(".bidhistory table tbody tr").find("td").eq(0).html()+"</p>");
 					}else if(msg == "nowinner"){
-						$('.itemdesc').append("<p id='winner'><span>Winner: </span> N/A</p>");
+						$('.itemdesc').append("<p id='winner'><span>Победитель: </span>-</p>");
 					}
 			   }
 		});
@@ -91,7 +91,7 @@ var clear = function(){
 
 $(function(){
 	setInterval(function(){
-		$.get("itemLoadBidHistory.php",
+		$.get("http://auctionsite/php/module/itemLoadBidHistory.php",
 		{ item_id:$(".itemIdAjax").val() }, function(data){
 			$('.bidhistory').eq(0).html(data);
 		});

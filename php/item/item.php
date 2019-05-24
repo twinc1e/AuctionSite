@@ -30,7 +30,7 @@
 
 
 		// //Calculate left time
-		// $today = date("Y-m-d H:i");
+		// $today = date("Y-m-d H:i") ;
 		// $second = abs(time()-strtotime($endtime));
 		// $leftime = sec2hms($second);
 

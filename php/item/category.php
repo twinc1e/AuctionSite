@@ -73,5 +73,4 @@
 		}
 	}
 ?>
-<!-- <script type="text/javascript" src="../../js/equalHeightCol.js"></script> -->
 <?php require_once('../core/footer.php'); ?>

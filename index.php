@@ -8,8 +8,12 @@
 		$query = "SELECT * FROM item, category WHERE item.category_id = category.category_id AND item.endtime >CURRENT_TIMESTAMP";
 		$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
-		if(!mysqli_num_rows($result) == 0){
+		if(mysqli_num_rows($result) == 0){
+			header('Location: http://AuctionSite/index.php');
+			exit();
+		}else{
 			$row = mysqli_fetch_array($result);
+			$item_id = $row['item_id'];
 			$endtime = $row['endtime'];
 			$initialprice = $row['initialprice'];
 }
@@ -24,7 +28,7 @@
 
 			//-------------------------------------
 
-				//что-то
+				//Ваша ставка
 				if(isset($_POST['bid'])){
 					$_SESSION['notice'] = NULL;
 					$_SESSION['errorMsg'] = NULL;
@@ -51,7 +55,7 @@
 				}
 ?>
 
-	<script type="text/javascript" src="../../js/countDown.js"></script>
+	<script type="text/javascript" src="js/countDown.js"></script>
 <h1>Действующий аукцион</h1>
 <?php
 	if(isset($_SESSION["user_id"]) && $_SESSION["permission"] ==2 && mysqli_num_rows($result)<=1)
@@ -62,9 +66,9 @@
 		// /* while(*/$row = mysqli_fetch_array($result);//){
 			echo "<div class='item'>";
 			echo "<div class='itemImage'><a href='php/item/item.php?ID=" . $row['item_id'] . "'><img src='" . $row['photo'] . "' alt='" . $row['itemname'] . "'/></a></div>";
-			echo "<p><span class='itemname'>Name:</span><a href='php/item/item.php?ID=" . $row['item_id'] . "'>" . $row['itemname'] . "</a></p>";
-			echo "<p><span>End time:</span> " . $row['endtime'] . "</p>";
-			echo "<p><span class='itemcategory'>Category:</span><a href='php/item/category.php?category=" . $row['category_id'] . "'>" . $row['category_name'] . "</a></p>";
+			echo "<p><span class='itemname'>Название:</span><a href='php/item/item.php?ID=" . $row['item_id'] . "'>" . $row['itemname'] . "</a></p>";
+			echo "<p><span>Время окончания:</span> " . $row['endtime'] . "</p>";
+			echo "<p><span class='itemcategory'>Категория:</span><a href='php/item/category.php?category=" . $row['category_id'] . "'>" . $row['category_name'] . "</a></p>";
 			echo "</div>";
 		}else{
 			echo "<p>Пусто</p>";
@@ -72,7 +76,7 @@
 		?>
 	<div class="itemdesc">
 		<p id="hms">
-			<span>Осталось времени (Hours:Minutes:Second):</span><br>
+			<span>Осталось времени (Часы:Минуты:Секунды):</span><br>
 			<span id="hour"></span>:<span id="min"></span>:<span id="second"></span>
 			<input type="hidden" id="timeleftHidden" value="<?php echo $leftime; ?>">
 		</p>
