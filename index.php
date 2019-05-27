@@ -15,16 +15,16 @@
 			$row = mysqli_fetch_array($result);
 			$item_id = $row['item_id'];
 			$endtime = $row['endtime'];
-			$initialprice = $row['initialprice'];
 }
 			//Вычисляет оставшееся время
 			$today = date("Y-m-d H:i");
-			//var_dump("now-",$today."<br>");
+			var_dump("now-",$today."<br>");
 			//секунды учитываем. time() - время в сек.
 			$second = abs(time()-strtotime($endtime));//strtotime($endtime)=strtotime($endtime, $today)
-			//print_r("now-".time()."--end-".strtotime($endtime)."<br>now1-".strtotime($today));
-			//print_r("<br>sec-".$second);
+			print_r("now-".time()."--end-".strtotime($endtime)."<br>now1-".strtotime($today));
+			print_r("<br>sec-".$second);
 			$leftime = sec2hms($second);
+<<<<<<< HEAD
 
 			//-------------------------------------
 
@@ -56,6 +56,10 @@
 ?>
 
 	<script type="text/javascript" src="js/countDown.js"></script>
+=======
+?>
+
+>>>>>>> parent of 81e6c9f... correct time. Cannot take stavka
 <h1>Действующий аукцион</h1>
 <?php
 	if(isset($_SESSION["user_id"]) && $_SESSION["permission"] ==2 && mysqli_num_rows($result)<=1)
@@ -63,7 +67,7 @@
 		echo "<div class = 'btn add'><a href='php/item/add.php'> Добавить лот </a></div>";
 	}
 	if(mysqli_num_rows($result) != 0){
-		// /* while(*/$row = mysqli_fetch_array($result);//){
+		/* while(*/$row = mysqli_fetch_array($result);//){
 			echo "<div class='item'>";
 			echo "<div class='itemImage'><a href='php/item/item.php?ID=" . $row['item_id'] . "'><img src='" . $row['photo'] . "' alt='" . $row['itemname'] . "'/></a></div>";
 			echo "<p><span class='itemname'>Название:</span><a href='php/item/item.php?ID=" . $row['item_id'] . "'>" . $row['itemname'] . "</a></p>";
@@ -80,36 +84,8 @@
 			<span id="hour"></span>:<span id="min"></span>:<span id="second"></span>
 			<input type="hidden" id="timeleftHidden" value="<?php echo $leftime; ?>">
 		</p>
-	</div>
-	<?php
-		if(isset($_SESSION["user_id"]) && $_SESSION["user_id"] == $usernameId){
-			?><div class="item">
-				<form id="biddingForm" action="#" method="post">
-					<p class='warning'>Нельзя за свой лот делать ставку</p>
-					<input type="hidden" name="itemId" value="<?php echo $item_id ?>" />
-				</form>
-			</div>
-			<?php
-		}elseif(isset($_SESSION["user_id"])){
-			?><div class="item">
-				<form id="biddingForm" action="" method="post">
-					<input type="hidden" name="itemId" value="<?php echo $item_id ?>" />
-					<label for="bidPrice">Ставка:</label>
-					<input type="text" name="bidPrice" />
-					<input type="submit" name="bid" id="bid" value="Bid">
-				</form>
-			</div>
-			<?php
-		}else{
-			$queryWinner = "SELECT * FROM bidHistory, user WHERE bidHistory.item_id = $item_id AND bidHistory.user_id =user.user_id ORDER BY bidHistory.bidhistory_id DESC LIMIT 0,1";
-			$resultWinner = $mysqli->query($queryWinner) or die('Ошибка '.$mysqli->error());
-			if(mysqli_num_rows($resultWinner) != 0){
-				$rowWinner = mysqli_fetch_array($resultWinner);
-				echo "<p><span>Победитель:</span> " . $rowWinner['username'] . "</p>";
-			}else{
-				echo "<p><span>Победитель:</span>-</p>";
-			}
-		}
+	</div><?
 	//}
+
 	require_once('php/core/footer.php');
 ?>
