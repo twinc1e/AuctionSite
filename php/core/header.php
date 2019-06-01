@@ -71,18 +71,18 @@
 						<li><a href="http://AuctionSite/index.php">Главная</a></li>
 						<li>
 							<a href="http://AuctionSite/php/item/category.php?category=all">Анонс</a>
-							<ul class="submenu">
+							<!-- <ul class="submenu">
 								<?php
 								// require_once('function/db.php');
-								$query = "SELECT * FROM category";
-								$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
-
-								while($row = mysqli_fetch_array($result))
-								{
-									echo "<li><a href='http://AuctionSite/php/item/category.php?category=".$row['category_id']."'>" . $row['category_name'] . "</a></li>";
-								}
+								// $query = "SELECT * FROM category";
+								// $result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
+								//
+								// while($row = mysqli_fetch_array($result))
+								// {
+								// 	echo "<li><a href='http://AuctionSite/php/item/category.php?category=".$row['category_id']."'>" . $row['category_name'] . "</a></li>";
+								// }
 								?>
-							</ul>
+							</ul> -->
 						</li>
 						<?php if(isset($_SESSION["user_id"])){?>
 						<li>

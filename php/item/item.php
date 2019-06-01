@@ -10,7 +10,7 @@
 	}
 
 	$itemId = $_GET['ID'];
-	$query = "SELECT * FROM item,user,category WHERE item_id = $itemId AND item.user_id = user.user_id AND item.category_id = category.category_id";
+	$query = "SELECT * FROM item,category WHERE item_id = $itemId  AND item.category_id = category.category_id";
 	$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
 	if(mysqli_num_rows($result) == 0){
@@ -29,17 +29,17 @@
 		$usernameId = $row['user_id'];
 
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 		// //Calculate left time
 		// $today = date("Y-m-d H:i") ;
 		// $second = abs(time()-strtotime($endtime));
 		// $leftime = sec2hms($second);
-=======
+//=======
 		//Calculate left time
 		$today = date("Y-m-d H:i");
 		$second = abs(time()-strtotime($endtime, $today));
 		$leftime = sec2hms($second);
->>>>>>> parent of 81e6c9f... correct time. Cannot take stavka
+//>>>>>>> parent of 81e6c9f... correct time. Cannot take stavka
 
 		//Получить последнюю ставку
 		$queryHigherBid = "SELECT max(price) FROM bidHistory WHERE item_id = '$item_id' ORDER BY bidhistory_id DESC LIMIT 0, 1";
@@ -76,11 +76,11 @@
 ?>
 
 <?php require_once('../core/header.php'); ?>
-<h1>Item: <?php echo $itemname; ?></h1>
+<h1>Лот: <?php echo $itemname; ?></h1>
 <div class="itemimg">
 	<img src="<?php echo $photo; ?>" alt="product image" />
 </div>
-<div class="itemdesc">
+<div class="itemdesc" id="<?php echo $item_id ?>">
 	<input type="hidden" name="itemIdAjax" class="itemIdAjax" value="<?php echo $item_id ?>" />
 	<p><span>Название товара:</span> <?php echo $itemname; ?></p>
 	<p><span>Категория:</span> <?php echo $categoryName; ?></p>
@@ -96,36 +96,36 @@
 			}
 		?>
 	</p>
-
+<!--
 				<p id="hms">
 					<span>Осталось времени (Hours:Minutes:Second):</span>
 					<span id="hour"></span>:<span id="min"></span>:<span id="second"></span>
-					<input type="hidden" id="timeleftHidden" value="<?php echo $leftime; ?>">
-				</p>
+				-->	<input type="hidden" id="timeleftHidden" value="<?php echo $leftime; ?>">
+				<!-- </p>  -->
 
 	<p><span>Конец через:</span> <?php echo $endtime; ?></p>
 	<p><span>Описание:</span> <?php echo $description; ?></p>
 
 	<?php
 
-			if(isset($_SESSION["user_id"]) && $_SESSION["user_id"] == $usernameId){
+			// if(isset($_SESSION["user_id"]) && $_SESSION["user_id"] == $usernameId){
 				?>
-					<form id="biddingForm" action="#" method="post">
-						<p class='warning'>Нельзя за свой лот делать ставку</p>
-						<input type="hidden" name="itemId" value="<?php echo $item_id ?>" />
-					</form>
-				<?php
-			}elseif(isset($_SESSION["user_id"])){
-				?>
-					<form id="biddingForm" action="" method="post">
-						<input type="hidden" name="itemId" value="<?php echo $item_id ?>" />
-						<label for="bidPrice">Ставка:</label>
-						<input type="text" name="bidPrice" />
-						<input type="submit" name="bid" id="bid" value="Bid">
-					</form>
-				<?php
-			}
-		else{
+		  			<!-- <form id="biddingForm" action="#" method="post">
+		 				<p class='warning'>Нельзя за свой лот делать ставку</p>
+		 				<input type="hidden" name="itemId" value="<?php// echo $item_id ?>" />
+		 			</form> -->
+		 		<?php
+		// 	}elseif(isset($_SESSION["user_id"])){
+		// 		?>
+		 			<!-- <form id="biddingForm" action="" method="post">
+		 				<input type="hidden" name="itemId" value="<?php //echo $item_id ?>" />
+		 				<label for="bidPrice">Ставка:</label>
+		 				<input type="text" name="bidPrice" />
+		 				<input type="submit" name="bid" id="bid" value="Bid">
+		 			</form> -->
+	 		<?php
+		// 	}
+		// else{
 			$queryWinner = "SELECT * FROM bidHistory, user WHERE bidHistory.item_id = $item_id AND bidHistory.user_id =user.user_id ORDER BY bidHistory.bidhistory_id DESC LIMIT 0,1";
 			$resultWinner = $mysqli->query($queryWinner) or die('Ошибка '.$mysqli->error());
 			if(mysqli_num_rows($resultWinner) != 0){
@@ -134,7 +134,7 @@
 			}else{
 				echo "<p><span>Победитель:</span>-</p>";
 			}
-		}
+		// }
 	?>
 </div>
 <div class="clear"></div>
@@ -143,9 +143,5 @@
 		Load from itemLoadBidHistory.php via ajax
 	-->
 </div>
-<<<<<<< HEAD
-<!-- <script type="text/javascript" src="../../js/countDown.js"></script> -->
-=======
-<script type="text/javascript" src="../../asset/js/countDown.js"></script>
->>>>>>> parent of 81e6c9f... correct time. Cannot take stavka
+<script type="text/javascript" src="../../js/countDown.js"></script>
 <?php require_once('../core/footer.php'); ?>

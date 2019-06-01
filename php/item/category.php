@@ -5,11 +5,11 @@
 	if(isset($_GET['category'])){
 		$category_id = $_GET['category'];
 		if($category_id == 'all'){
-			$query = "SELECT * FROM item, category WHERE category.category_id = item.category_id ORDER BY item.item_id DESC";
+			$query = "SELECT * FROM item, category WHERE category.category_id = item.category_id AND item.endtime >CURRENT_TIMESTAMP ORDER BY item.item_id DESC";
 		}else{
 			$query = "SELECT * FROM item, category WHERE category.category_id = '$category_id' AND item.category_id = '$category_id' ORDER BY item.item_id DESC";
 		}
-		$result = $mysqli->query($query) or die('Ошибка '.'Ошибка '.$mysqli->error);
+		$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 	}
 
 	if(isset($_GET['archive'])){
@@ -31,14 +31,14 @@
 <h1>
 <?php
 	if(!empty($category_id)){
-		$queryCat = "SELECT * FROM category WHERE category_id = '$category_id' LIMIT 1";
-		$resultCat = $mysqli->query($queryCat) or die('Ошибка '.$mysqli->error);
-		if(mysqli_num_rows($resultCat)!=0){
-			$rowCat = mysqli_fetch_array($resultCat);
-			echo "Анонс: ".$rowCat['category_name'];
-		}else{
-			echo "Анонс лотов: ВСЕ";
-		}
+		// $queryCat = "SELECT * FROM category WHERE category_id = '$category_id' LIMIT 1";
+		// $resultCat = $mysqli->query($queryCat) or die('Ошибка '.$mysqli->error);
+		// if(mysqli_num_rows($resultCat)!=0){
+		// 	$rowCat = mysqli_fetch_array($resultCat);
+		// 	echo "Анонс: ".$rowCat['category_name'];
+		// }else{
+			echo "Анонс лотов";
+		//}
 	}
 	if(!empty($archive_id)){
 		$queryArch = "SELECT * FROM category WHERE category_id = '$archive_id' LIMIT 1";

@@ -227,8 +227,15 @@ div.btn{
 	background:#FF8585;
 	padding:5px 10px;
 }
+
+.bid{
+    position: relative;
+    float: right;
+    margin-top: inherit;
+}
+
 .bidhistory{
-	margin-top:80px;
+	margin-top:2rem;
 	background:#EEE;
 	padding:20px 0 30px 0;
 
@@ -261,7 +268,6 @@ div.btn{
 	margin:0;
 	color:#000;
 }
-
 /*category.php*/
 .item{
 	width:318px;

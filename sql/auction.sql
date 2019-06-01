@@ -31,8 +31,10 @@ CREATE TABLE IF NOT EXISTS `auction`.`bidHistory` (
   `user_id` int(11) DEFAULT NULL,
   `price` double NOT NULL,
   `bidhistory_id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`bidhistory_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`bidhistory_id`),
+  FOREIGN KEY (`item_id`) REFERENCES `item`(`item_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bidHistory`
@@ -90,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `auction`.`category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(30) NOT NULL,
   PRIMARY KEY (`category_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
@@ -136,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `auction`.`item` (
   `winner` int(11) NOT NULL,
   PRIMARY KEY (`item_id`),
   FOREIGN KEY (`category_id`) REFERENCES `category`(`category_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Дамп данных таблицы `item`
@@ -172,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `auction`.`user` (
   `password` varchar(30) NOT NULL,
   `permission` int(11) DEFAULT '0',
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
@@ -187,35 +189,6 @@ INSERT IGNORE INTO `auction`.`user` (`user_id`, `username`, `name`, `email`, `pa
 
 --
 -- Indexes for dumped tables
---
-
---
--- Indexes for table `bidHistory`
---
--- IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
--- WHERE CONSTRAINT_TYPE = 'PRIMARY KEY' AND TABLE_NAME = 'bidHistory' AND TABLE_SCHEMA ='auction')
-  -- ALTER TABLE `auction`.`bidHistory`
-  -- ADD PRIMARY KEY (`bidhistory_id`);
---
--- Индексы таблицы `category`
---
--- ALTER TABLE `auction`.`category`
---   ADD PRIMARY KEY (`category_id`);
-
---
--- Индексы таблицы `item`
---
--- ALTER TABLE `auction`.`item`
---   ADD PRIMARY KEY (`item_id`),
-  -- ADD foreign KEY `category_id` (`category_id`);
-
---
--- Индексы таблицы `user`
---
--- ALTER TABLE `auction`.`user`
---   ADD PRIMARY KEY (`user_id`);
-
---
 --
 
 --

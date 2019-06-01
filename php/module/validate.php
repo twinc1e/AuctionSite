@@ -85,16 +85,20 @@
 			     }
 			}
 		}else{
-			array_push($error, "фото должно быть gif, jpeg, pjpeg, или png формата");
+			array_push($error, "$attr фото должно быть gif, jpeg, pjpeg, или png формата");
 		}
 	}
 
 	function validateBidPrice($pricebid, $initialprice, &$error, $itemid, $attr){
-			// require_once('php/core/db.php');
-		$query = "SELECT max(price) FROM bidHistory WHERE item_id = '$itemid' ORDER BY bidhistory_id DESC LIMIT 0, 1";
+		//var_dump($mysqli->query("SELECT max(price) FROM bidHistory WHERE item_id = 17 ORDER BY bidhistory_id DESC LIMIT 0, 1"));
+$query = "SELECT max(price) FROM bidHistory WHERE item_id = '17' ORDER BY bidhistory_id DESC LIMIT 0, 1";
 		$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error());
-		$row = $mysqli->fetch_array($result);
-		$pricebidhis = $row['max(price)'];
+		// if(mysqli_num_rows($result) == 0)
+		// 	$pricebidhis = $initialprice;
+		// else{
+				$row = $mysqli->fetch_array($result);
+				$pricebidhis = $row['max(price)'];
+			//}
 		if($initialprice >= $pricebid){
 			array_push($error, "Ставка должна быть выше, чем первоначальная цена: $initialprice");
 		}elseif($pricebidhis >= $pricebid){

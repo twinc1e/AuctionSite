@@ -92,8 +92,9 @@ var clear = function(){
 $(function(){
 	setInterval(function(){
 		$.get("http://auctionsite/php/module/itemLoadBidHistory.php",
-		{ item_id:$(".itemIdAjax").val() }, function(data){
-			$('.bidhistory').eq(0).html(data);
+		{ //item_id:$(".itemIdAjax").val() }, function(data){
+      item_id:$(".itemdesc").attr("id") }, function(data){
+  			$('.bidhistory').eq(0).html(data);
 		});
 	},1000);
 });
