@@ -3,7 +3,7 @@
 	require_once('../core/db.php');
 	require_once('../module/validate.php');
 	require_once('../module/fpdf.php');
-$user = $_SESSION["user_id"];
+$user = $_SESSION['user_id'];
 	$query = "SELECT item.item_id as Num, item.itemname as Name, MAX(bidHistory.price) as Price
 						FROM item, bidHistory
 						WHERE item.item_id=bidHistory.item_id AND item.winner=bidHistory.user_id
@@ -45,7 +45,7 @@ $user = $_SESSION["user_id"];
 		validateTextBox($password, array(3,20), $error, "Пароль", false);
 		/* end of validate */
 
-			if(empty($error)){//perm = 0 по ТЗ регаться только клиентам
+			if(empty($error)){//perm = 1 по ТЗ регаться только клиентам
 				$query = "INSERT INTO user(username, name, email, password, permission) values('$username', '$name', '$email', '$password',0)";
 				$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 

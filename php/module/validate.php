@@ -1,5 +1,5 @@
 <?php
-
+//require_once('php/core/db.php');
 	function validateTextBox($text, $length, &$error, $attr, $empty=false){
 		if(is_string($text)){
 			if($empty == false){
@@ -89,15 +89,16 @@
 		}
 	}
 
-	function validateBidPrice($pricebid, $initialprice, &$error, $itemid, $attr){
-		//var_dump($mysqli->query("SELECT max(price) FROM bidHistory WHERE item_id = 17 ORDER BY bidhistory_id DESC LIMIT 0, 1"));
-$query = "SELECT max(price) FROM bidHistory WHERE item_id = '17' ORDER BY bidhistory_id DESC LIMIT 0, 1";
+	function validateBidPrice($pricebid, $initialprice, &$error, $itemid){//, $attr){
+		//var_dump("SELECT max(price) FROM bidHistory WHERE item_id = $itemid ORDER BY bidhistory_id");
+		$query = "SELECT IFNULL(max(price),0) AS max_p FROM bidHistory WHERE item_id = $itemid ORDER BY bidhistory_id";
 		$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error());
 		// if(mysqli_num_rows($result) == 0)
 		// 	$pricebidhis = $initialprice;
 		// else{
-				$row = $mysqli->fetch_array($result);
-				$pricebidhis = $row['max(price)'];
+				$row = $result->fetch_assoc();
+				$pricebidhis = $row["max_p"];
+				echo "price".$pricebidhis;
 			//}
 		if($initialprice >= $pricebid){
 			array_push($error, "Ставка должна быть выше, чем первоначальная цена: $initialprice");

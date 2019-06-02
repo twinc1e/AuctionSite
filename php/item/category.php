@@ -5,9 +5,9 @@
 	if(isset($_GET['category'])){
 		$category_id = $_GET['category'];
 		if($category_id == 'all'){
-			$query = "SELECT * FROM item, category WHERE category.category_id = item.category_id AND item.endtime >CURRENT_TIMESTAMP ORDER BY item.item_id DESC";
+			$query = "SELECT * FROM item, category WHERE category.category_id = item.category_id AND item.endtime >CURRENT_TIMESTAMP ORDER BY item.item_id DESC LIMIT 1";
 		}else{
-			$query = "SELECT * FROM item, category WHERE category.category_id = '$category_id' AND item.category_id = '$category_id' ORDER BY item.item_id DESC";
+			$query = "SELECT * FROM item, category WHERE category.category_id = '$category_id' AND item.category_id = '$category_id'  AND item.endtime >CURRENT_TIMESTAMP ORDER BY item.item_id DESC";
 		}
 		$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 	}

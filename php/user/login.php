@@ -23,6 +23,7 @@
 		//{
 			$_SESSION['user_id'] = $row['user_id'];
 			$_SESSION['username'] = $row['username'];
+			$_SESSION['permission'] = $row['permission'];
 		//}
 		header("Location: $prev");
 		exit();

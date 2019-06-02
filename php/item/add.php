@@ -1,6 +1,7 @@
 <?php
 	session_start();
-	if(empty($_SESSION["user_id"])){
+	//echo "session ".$_SESSION['user_id'];
+	if(empty($_SESSION['user_id'])|| $_SESSION["permission"] <2){
 		header('Location: http://AuctionSite/index.php');
 		exit();
 	}

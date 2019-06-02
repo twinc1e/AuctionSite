@@ -37,7 +37,7 @@
 		<div class="loginWrapper">
 			<div class="login">
 				<?php
-					if(isset($_SESSION["user_id"])){
+					if(isset($_SESSION['user_id'])){
 						echo "<a href='http://AuctionSite/php/user/reg.php?view=true'>Личный кабинет ".$_SESSION["username"] . "</a>
 						<button class = 'btn'><a href='http://AuctionSite/php/user/logout.php'>Выйти</a></button>";
 					}else{
@@ -84,7 +84,7 @@
 								?>
 							</ul> -->
 						</li>
-						<?php if(isset($_SESSION["user_id"])){?>
+						<?php if(isset($_SESSION['user_id'])){?>
 						<li>
 							<a href="http://AuctionSite/php/item/category.php?archive=all">История лотов</a>
 							<ul class="submenu">

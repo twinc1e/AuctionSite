@@ -56,7 +56,7 @@
 		$error = array();
 
 		validateCurrency($price, $error, true, 1, 10000, "Цена");
-		validateBidPrice($price, $initialprice, $error, $item_id, "Ваша ставка = ");
+		validateBidPrice($price, $initialprice, $error, $item_id);//, "Ваша ставка = ");
 
 		if(empty($error)){
 			$currentUser = $_SESSION['user_id'];
@@ -99,8 +99,8 @@
 <!--
 				<p id="hms">
 					<span>Осталось времени (Hours:Minutes:Second):</span>
-					<span id="hour"></span>:<span id="min"></span>:<span id="second"></span>
-				-->	<input type="hidden" id="timeleftHidden" value="<?php echo $leftime; ?>">
+				--><div style="display: none;"><span id="hour"></span>:<span id="min"></span>:<span id="second"></span></div>
+					<input type="hidden" id="timeleftHidden" value="<?php echo $leftime; ?>">
 				<!-- </p>  -->
 
 	<p><span>Конец через:</span> <?php echo $endtime; ?></p>
@@ -108,14 +108,14 @@
 
 	<?php
 
-			// if(isset($_SESSION["user_id"]) && $_SESSION["user_id"] == $usernameId){
+			// if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == $usernameId){
 				?>
 		  			<!-- <form id="biddingForm" action="#" method="post">
 		 				<p class='warning'>Нельзя за свой лот делать ставку</p>
 		 				<input type="hidden" name="itemId" value="<?php// echo $item_id ?>" />
 		 			</form> -->
 		 		<?php
-		// 	}elseif(isset($_SESSION["user_id"])){
+		// 	}elseif(isset($_SESSION['user_id'])){
 		// 		?>
 		 			<!-- <form id="biddingForm" action="" method="post">
 		 				<input type="hidden" name="itemId" value="<?php //echo $item_id ?>" />

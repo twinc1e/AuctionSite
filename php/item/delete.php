@@ -1,6 +1,6 @@
 <?
 	session_start();
-	if(empty($_SESSION["user_id"])||$_SESSION["user_id"])<2){
+	if(empty($_SESSION['user_id'])||$_SESSION['user_id'])<3){
 		header('Location: http://AuctionSite/index.php');
 		exit();
 	}
