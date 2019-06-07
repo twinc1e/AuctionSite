@@ -8,7 +8,7 @@
 	require_once('../core/db.php');
 	require_once('../module/validate.php');
 	//May wrong below 1 line code
-	$_SESSION["notice"] = NULL;
+	$_SESSION['notice'] = NULL;
     //$link=mysqli_connect("127.0.0.1","root","","auction");
 	if(isset($_POST["submit"])){
 		$_SESSION["errorMsg"] = NULL;
@@ -42,7 +42,7 @@
 			if($result){
 				//here didnt solve yet
 				$lastQueryId = $mysqli->insert_id;
-				$_SESSION["notice"] = "Лот успешно создан.";
+				$_SESSION['notice'] = "Лот успешно создан.";
 				header("Location: item.php?itemid=$lastQueryId");
 				exit();
 			}

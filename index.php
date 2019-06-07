@@ -53,7 +53,7 @@
 						$resultBid = $mysqli->query($queryBid) or die('Ошибка '.$mysqli->error());
 						if($resultBid){
 							$prev = $_SERVER['HTTP_REFERER'];
-							$_SESSION["notice"] = "Ставка сделана";
+							$_SESSION['notice'] = "Ставка сделана";
 							// header("Location: index.php");
 						}
 					}else{

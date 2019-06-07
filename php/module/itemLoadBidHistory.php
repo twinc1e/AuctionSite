@@ -3,11 +3,13 @@
 		require_once('../core/db.php');
 		$item_id = $_GET['item_id'];
 			$queryBidHis = "SELECT * FROM bidHistory WHERE bidHistory.item_id = $item_id ORDER BY bidHistory.bidhistory_id DESC";
+		// $queryBidHis = "SELECT * FROM bidHistory LEFT JOIN user ON bidHistory.user_id=user.user_id
+		// WHERE bidHistory.item_id = $item_id
+		// GROUP BY item_id ORDER BY bidHistory.bidhistory_id DESC";
 		// $queryBidHis = "SELECT * FROM bidHistory LEFT JOIN user Using(user_id) WHERE bidHistory.item_id = $item_id ORDER BY bidHistory.bidhistory_id DESC";
 		$resultBidHis = $mysqli->query($queryBidHis) or die('Ошибка '.$mysqli->error);
 		$emptyBidHis = (mysqli_num_rows($resultBidHis) == 0? true:false);
-		$queryuser = $mysqli->query("SELECT * FROM user") or die('Ошибка '.$mysqli->error);;
-	}
+		}
 ?>
 
 <table>
@@ -23,15 +25,16 @@
 			echo "<tr><th>Пользователь</th><th>Ставка</th></tr>";
 			while($rowBidHis = mysqli_fetch_array($resultBidHis))
 			{
-				while($row = mysqli_fetch_array($queryuser)){
+				$bidUser = $rowBidHis['user_id'];
+				$queryuser = $mysqli->query("SELECT * FROM user WHERE user_id=$bidUser")->fetch_array() or die('Ошибка '.$mysqli->error);
 					//echo "user ".$row['user_id']." bid".$rowBidHis['user_id']."<br>";
-					if ($row['user_id']==$rowBidHis['user_id'])
-						$name = $row['username'];}
+					// if ($row['user_id']==$rowBidHis['user_id'])
+						$name = $queryuser['username'];
 						//echo "name ".$name;//$queryBidHis =
 				//if ($rowBidHis['item_id'] == $item_id)
 					echo "<tr>
-					<td>" . $rowBidHis['user_id']." ".$name. "</td><td>" . $rowBidHis['price'] . "</td>
-					<input type='hidden' name='user_id' id='user_id' value='".$rowBidHis['user_id']."'/>
+					<td>" . $bidUser." ".$name. "</td><td>" . $rowBidHis['price'] . "</td>
+					<input type='hidden' name='user_id' id='user_id' value='".$bidUser."'/>
 				</tr>";
 			}
 		}

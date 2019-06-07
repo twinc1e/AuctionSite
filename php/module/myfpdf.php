@@ -41,7 +41,7 @@
         $this->ln();
 	}
 }
-
+//-----------
 function printToPDF($data)
 {
 	define('FPDF_FONTPATH','font/');
@@ -59,7 +59,15 @@ function printToPDF($data)
 	$pdf->pdfTable($header,$data);
 	// $pdf->pdfTable($header,$data);
 	// $pdf->Output();
-
 	//$pdf->Cell(960,500,include 'file.php');
-	$pdf->Output("For_winner.pdf");
+	$pdf->Output("For_winner.pdf","../../");
 }
+//------open func from url without request
+if (isset($_GET['exportEl'])) {
+    printToPDF($exportEl);
+		var_dump( "data_yes",$exportEl);
+		$_SESSION['notice'] = "Экспорт прошел успешно";
+  }else{
+		var_dump( "data_no");
+		$_SESSION['notice'] = "Экспорт прошел успешно";
+	}

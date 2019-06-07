@@ -7,7 +7,7 @@
 	require_once('../core/db.php');
 	require_once('../module/validate.php');
 	//May wrong below 1 line code
-	$_SESSION["notice"] = NULL;
+	$_SESSION['notice'] = NULL;
 
 ?>
 <h3>Удалить лот</h3>
@@ -19,7 +19,7 @@
 if($_GET['delete'] == "true") {//данные из формы 'delete' получены
 	$sqlquery=$mysqli->query("DELETE FROM Tasks WHERE ID='". $_GET['id']."'");
 	if ($sqlquery==true){
-		$_SESSION["notice"] = "Лот успешно создан.";
+		$_SESSION['notice'] = "Лот успешно создан.";
 			header("location: $_SERVER['HTTP_REFERER']");
 	}
 	else {

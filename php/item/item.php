@@ -27,7 +27,7 @@
 		$categoryName = $row['category_name'];
 		$username = $row['username'];
 		$usernameId = $row['user_id'];
-
+		$winner = $row['winner'];
 
 //<<<<<<< HEAD
 		// //Calculate left time
@@ -48,7 +48,7 @@
 		$priceHigherBid = $rowHigherBid['max(price)'];
 	}
 
-	//что-то
+	//для itemLoadBidHistory через jquery
 	if(isset($_POST['bid'])){
 		$_SESSION['notice'] = NULL;
 		$_SESSION['errorMsg'] = NULL;
@@ -64,7 +64,7 @@
 			$resultBid = $mysqli->query($queryBid) or die('Ошибка '.$mysqli->error());
 			if($resultBid){
 				$prev = $_SERVER['HTTP_REFERER'];
-				$_SESSION["notice"] = "Ставка сделана";
+				$_SESSION['notice'] = "Ставка сделана";
 				header("Location: item.php?itemid=$item_id");
 			}
 		}else{
@@ -126,7 +126,9 @@
 	 		<?php
 		// 	}
 		// else{
-			$queryWinner = "SELECT * FROM bidHistory, user WHERE bidHistory.item_id = $item_id AND bidHistory.user_id =user.user_id ORDER BY bidHistory.bidhistory_id DESC LIMIT 0,1";
+			$queryWinner = "SELECT * FROM bidHistory, user WHERE bidHistory.user_id =user.user_id
+			AND bidHistory.item_id = $item_id AND user.user_id = $winner ORDER BY bidHistory.bidhistory_id DESC LIMIT 0,1";
+			// var_dump($queryWinner);
 			$resultWinner = $mysqli->query($queryWinner) or die('Ошибка '.$mysqli->error());
 			if(mysqli_num_rows($resultWinner) != 0){
 				$rowWinner = mysqli_fetch_array($resultWinner);

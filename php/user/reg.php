@@ -2,12 +2,13 @@
 	session_start();
 	require_once('../core/db.php');
 	require_once('../module/validate.php');
-	require_once('../module/fpdf.php');
-$user = $_SESSION['user_id'];
+	$user_id = $_SESSION['user_id'];
+	// var_dump($user_id);
 	$query = "SELECT item.item_id as Num, item.itemname as Name, MAX(bidHistory.price) as Price
-						FROM item, bidHistory
-						WHERE item.item_id=bidHistory.item_id AND item.winner=bidHistory.user_id
-						AND bidHistory.user_id = $user GROUP BY item.item_id";
+						FROM item
+						LEFT JOIN bidHistory ON item.item_id=bidHistory.item_id
+						WHERE item.winner=bidHistory.user_id	AND bidHistory.user_id = $user_id
+						GROUP BY item.item_id";
 	$result = $mysqli->query($query)or die('Ошибка '.$mysqli->error);
 	$data=array();
 		//if(count($result) != 0)
@@ -19,12 +20,10 @@ $user = $_SESSION['user_id'];
 			//var_dump("count=",count($data));
 
 	if(isset($_GET['view'])=='true' && !empty($_SESSION['user_id'])){
-		$user_id = $_SESSION['user_id'];
 		$queryView = "SELECT * FROM user WHERE user_id = $user_id";
 		$resultView = $mysqli->query($queryView) or die('Ошибка '.$mysqli->error);
 		$rowView = mysqli_fetch_array($resultView);
 	}
-
 	if(isset($_GET['view'])=='true' && empty($_SESSION['user_id'])){
 		header('Location: http://AuctionSite/index.php');
 	}
@@ -50,7 +49,7 @@ $user = $_SESSION['user_id'];
 				$result = $mysqli->query($query) or die('Ошибка '.$mysqli->error);
 
 				if($result){
-					$_SESSION["notice"] = "Вы успешно зарегистрировались, теперь можете войти";
+					$_SESSION['notice'] = "Вы успешно зарегистрировались, теперь можете войти";
 					header('Location: http://AuctionSite/index.php');
 				}
 			}else{
@@ -62,6 +61,7 @@ $user = $_SESSION['user_id'];
 			}
 	}
 ?>
+<script type="text/javascript" src="http://AuctionSite/asset/js/export.js"></script>
 <?php
 	require_once('../core/header.php');
 	if(isset($_GET['view'])=='true' && !empty($_SESSION['user_id'])){
@@ -70,13 +70,14 @@ $user = $_SESSION['user_id'];
 		echo "<p>Имя: " . $rowView['name'] . "</p>";
 		echo "<p>Эл.почта: " . $rowView['email'] . "</p>";
 
-		//-------Чек таблица в pdf-----------------
-		echo "<button class = 'btn'><a href='' onclick='printToPDF($data)'>Получить чек </a></button>";
+		//-------Чек таблица в pdf-----------------<a href='#' onclick='printToPDF("<?php echo $data>")'></a>
+		echo "<button class = 'btn' id='export' value = $data>Получить чек </button>";
+		// echo "<button class = 'btn'><a href='../module/myfpdf?print=$data'>Получить чек </a></button>";
 		//var_dump("all_",$data);
 	}else{
 
 		?>
-		<h1>Регистрация</h1>
+		<h1 >Регистрация</h1>
 		<form action="" class="form" method="post">
 			<p>
 				<label for="username">Пользователь</label>

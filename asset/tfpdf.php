@@ -1184,7 +1184,7 @@ function SetXY($x, $y)
 }
 
 function Output($name='', $dest='')
-{
+{	var_dump("output",$name);
 	// Output PDF to some destination
 	if($this->state<3)
 		$this->Close();
@@ -1224,10 +1224,12 @@ function Output($name='', $dest='')
 			echo $this->buffer;
 			break;
 		case 'F':
+			$this->_checkoutput();
 			// Save to local file
 			$f = fopen($name,'wb');
 			if(!$f)
 				$this->Error('Unable to create output file: '.$name);
+				var_dump('Unable to create output file: '.$name);
 			fwrite($f,$this->buffer,strlen($this->buffer));
 			fclose($f);
 			break;

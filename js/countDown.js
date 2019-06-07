@@ -79,9 +79,9 @@ var clear = function(){
 						$('#biddingForm').remove();
 					}
 
-			   		if(msg == "winner"){
+			   		if(msg == "Победитель"){
 						$('.itemdesc').append("<p id='winner'><span>Победитель: </span>"+$(".bidhistory table tbody tr").find("td").eq(0).html()+"</p>");
-					}else if(msg == "nowinner"){
+					}else if(msg == "НЕ победитель"){
 						$('.itemdesc').append("<p id='winner'><span>Победитель: </span>-</p>");
 					}
 			   }
